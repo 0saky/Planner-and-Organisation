@@ -5,20 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Coding Train reproduction</title>
+
+        <script src="script.js"></script>
+
     </head>
     <body>
-        <img src="" id="rainbow" width="480" />
-        <script>
-            console.log('about to fetch an image');
-            fetch('https://pbs.twimg.com/media/EMzoU3EW4AcIZqS?format=jpg&name=4096x4096')
-                .then(response => {
-                    console.log(response);
-                    return response.blob();
-                })
-                .then(blob => {
-                    console.log(blob);
-                    document.getElementById('rainbow').src = URL.createObjectURL(blob);
-                });
-        </script>
+        <img src="" id="rainbow" width="600" />
+        
     </body>
 </html>
