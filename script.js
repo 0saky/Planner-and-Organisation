@@ -21,15 +21,18 @@ for(let i = 0; i < ImageLink.length; i++){
 };
 
 
-
 async function getImage(i){
 
     const response = await fetch(ImageLink[i]);
 
-    const blob = await response.blob();
+    const blob = await response.blob();    
 
-    document.getElementById('rainbow ' + i).src = URL.createObjectURL(blob);
+    let img = document.createElement('img');
     
+    img.src = URL.createObjectURL(blob);
+
+    img.width = "600";
+
+    document.getElementById('images').appendChild(img);    
 
 }
-
