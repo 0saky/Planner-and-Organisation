@@ -1,5 +1,7 @@
 console.log("Nous allons fetch une image !");
 
+//const ImageLink = ['IMG.jpg'];
+
 const ImageLink = ['https://pbs.twimg.com/media/EKjmckrXkAARzLT?format=jpg&name=large',
         'https://pbs.twimg.com/media/ELXDM50X0AAIrP4?format=jpg&name=large',
         'https://pbs.twimg.com/media/EMzoU3EW4AcIZqS?format=jpg&name=4096x4096',
