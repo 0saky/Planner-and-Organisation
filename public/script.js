@@ -1,40 +1,49 @@
-console.log("Nous allons fetch une image !");
+//On test si la localisation est disponible :
+if ("geolocation" in navigator) {
+  /* geolocation is available */
+  console.log("Nous pouvons récupperrer votre position")
+  window.onload = function() {
+  SetupPage();
+  updatepage(); 
+  }
+  
 
-//const ImageLink = ['IMG.jpg'];
+} else {
+  /* geolocation IS NOT available */
+  let titre = document.getElementById("titre").innerHTML = "Désolé mais votre position n'est pas disponible";
+}
 
-const ImageLink = ['https://pbs.twimg.com/media/EKjmckrXkAARzLT?format=jpg&name=large',
-        'https://pbs.twimg.com/media/ELXDM50X0AAIrP4?format=jpg&name=large',
-        'https://pbs.twimg.com/media/EMzoU3EW4AcIZqS?format=jpg&name=4096x4096',
-        'https://pbs.twimg.com/media/EMfKGzXXUAAM2rw?format=jpg&name=large'];
+//fonction qui crée les elements de la page HTML
+function SetupPage() {
+  const txtlat = document.createElement('p');
+  txtlat.innerHTML = "Latitude : ";
+  const vallat = document.createElement('span');
+  vallat.id = "lat";
+  txtlat.append(vallat);
+  document.body.append(txtlat);
+  
+  const txtlon = document.createElement('p');
+  txtlon.innerHTML = "Longitude : ";
+  const vallon = document.createElement('span');
+  vallon.id = "lon";
+  txtlon.append(vallon);
+  document.body.append(txtlon);
+}
 
+//fonction qui met a jour la page.
+async function updatepage() {
+  const boutton = document.createElement('button');
+  boutton.onclick = function() { getlocation() };
+  boutton.textContent = "Get position";
+  document.body.append(boutton);
+  console.log(boutton);
+}
 
-for(let i = 0; i < ImageLink.length; i++){
-
-    console.log("Nous chargons actuellement l\'image numero " + i);
-    getImage(i)
-    .then(response => {
-        console.log('Chargement ...');
-    })
-    .catch( error => {
-        console.log('Une érreur vas suivre : ');
-        console.log(error);
-    });
-
-};
-
-
-async function getImage(i){
-
-    const response = await fetch(ImageLink[i]);
-
-    const blob = await response.blob();    
-
-    let img = document.createElement('img');
-    
-    img.src = URL.createObjectURL(blob);
-
-    img.width = "600";
-
-    document.getElementById('images').appendChild(img);    
-
+//fonction pour récup
+async function getlocation() {
+  navigator.geolocation.getCurrentPosition(  position => {
+    console.log(position);
+    document.getElementById('lat').textContent = position.coords.latitude;
+    document.getElementById('lon').textContent = position.coords.longitude;
+  });
 }
