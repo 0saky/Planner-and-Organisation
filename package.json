@@ -1,0 +1,22 @@
+{
+  "name": "planner-and-organisation",
+  "version": "1.0.0",
+  "description": "This is an app that have to goal to help you to plan you're activities",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0saky/Planner-and-Organisation.git"
+  },
+  "author": "Lilian C",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0saky/Planner-and-Organisation/issues"
+  },
+  "homepage": "https://github.com/0saky/Planner-and-Organisation#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
