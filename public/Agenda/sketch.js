@@ -6,11 +6,31 @@ let evenements = [{
     title: "Working",
     starting: "2020-01-13T08:24:00",
     ending: "2020-01-13T10:45:00",
+    category: "Work"
 },
 {
     title: "Sleeping",
-    starting: "2020-01-10T13:46:00",
-    ending: "2020-01-10T17:15:00",
+    starting: "2020-01-11T22:46:00",
+    ending: "2020-01-12T10:15:00",
+    category: "Sleep"
+},
+{
+    title: "Watching videos",
+    starting: "2020-01-13T11:00:00",
+    ending: "2020-01-13T12:35:00",
+    category: "Divertisment"
+},
+{
+    title: "Doing push-ups",
+    starting: "2020-01-13T14:30:00",
+    ending: "2020-01-13T15:00:00",
+    category: "Sport"
+},
+{
+    title: "Sleeping",
+    starting: "2020-01-12T23:46:00",
+    ending: "2020-01-13T07:30:00",
+    category: "Sleep"
 }
 ]
 let day;
@@ -76,6 +96,9 @@ function draw() {
     months.push(numberofdays - 1);
     // console.log("years : " + years);
     // console.log("months : "+ months);
+
+    draw_past();
+
     let conty = 0;
     let contm = 0;
 
@@ -118,6 +141,7 @@ function draw() {
     }
     pop();
 
+    
 
     conty = 0;
     contm = 0;
@@ -128,7 +152,7 @@ function draw() {
 
     draw_rowlines();
 
-    draw_past();
+    
 
     draw_now();
 
@@ -139,143 +163,3 @@ function draw() {
 
 
 
-function draw_clumnlines(i, bool1, bool2) {
-
-    const column = (i - 0.5) * width / numberofdays + 165;
-    stroke(0);
-    if (bool2) {
-        strokeWeight(5);
-        line(column, 15, column, height);
-    } else if (bool1) {
-        strokeWeight(5);
-        line(column, 70, column, height);
-    } else {
-        strokeWeight(3);
-        line(column, 70, column, height);
-    }
-}
-
-function draw_rowlines() {
-
-    for (let i = 1; i < 6; i++) {
-        const y = map(map(i, 0, 6, 0, 24), 0, 24, 70, height);
-        stroke(0, 0, 0, 50);
-        strokeWeight(4);
-
-        line(40, y, width, y);
-
-        noStroke();
-        textSize(20)
-        textAlign(LEFT);
-        fill(0);
-        text(i * 4 + "h", 0, y);
-    }
-}
-
-function create_buttons() {
-    button_pyear = createButton('Prévious');
-    button_pyear.position(15, 15);
-    button_pyear.mousePressed(pyear);
-
-    button_nyear = createButton('Next');
-    button_nyear.position(width - 30, 15);
-    button_nyear.mousePressed(nyear);
-
-    button_pmonths = createButton('Prévious');
-    button_pmonths.position(15, 45);
-    button_pmonths.mousePressed(pmonths);
-
-    button_nmonths = createButton('Next');
-    button_nmonths.position(width - 30, 45);
-    button_nmonths.mousePressed(nmonths);
-
-    button_pday = createButton('Prévious');
-    button_pday.position(15, 75);
-    button_pday.mousePressed(pday);
-
-    button_nday = createButton('Next');
-    button_nday.position(width - 30, 75);
-    button_nday.mousePressed(nday);
-}
-
-function pday() {
-    date = new Date(Date.parse(date) - increment);
-}
-
-function nday() {
-    date = new Date(Date.parse(date) + increment);
-}
-
-
-function pyear() {
-
-    date = new Date(date.getFullYear() - 1, 0, 1);
-
-}
-function nyear() {
-
-    date = new Date(date.getFullYear() + 1, 0, 1);
-
-}
-
-function pmonths() {
-
-    date = new Date(date.getFullYear(), date.getMonth() - 1, 1);
-
-}
-function nmonths() {
-
-    date = new Date(date.getFullYear(), date.getMonth() + 1, 1);
-
-}
-
-function draw_now() {
-    const now = new Date(Date.now());
-
-    for (let i = 0; i < numberofdays; i++) {
-        if (sameDate(days_array[i], now)) {
-
-            const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
-            const next_day = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
-            const y = map(Date.parse(now), Date.parse(midnight), Date.parse(next_day), 70, height);
-            strokeWeight(5);
-            stroke(255, 0, 0);
-            line(i * (width / numberofdays) + 40, y, (i + 1) * (width / numberofdays) + 40, y);
-        }
-    }
-}
-
-function draw_past() {
-    for (let i = 0; i < numberofdays; i++) {
-        const test_date = days_array[i];
-        
-        for (let j = 0; j < evenements.length; j++) {
-           // console.log(evenements[j].starting);
-            start_time = new Date(evenements[j].starting);
-            end_time = new Date(evenements[j].ending);
-            //console.log(start_time);
-            if (sameDate(test_date, start_time) || sameDate(test_date, end_time)) {
-
-                //console.log("Evenement a afficher : " + start_time + "Jusqu'a :" + end_time);
-
-                const midnight = new Date(test_date.getFullYear(), test_date.getMonth(), test_date.getDate(), 0, 0, 0, 0);
-                const next_day = new Date(test_date.getFullYear(), test_date.getMonth(), test_date.getDate() + 1, 0, 0, 0, 0);
-                const py = map(Date.parse(start_time), Date.parse(midnight), Date.parse(next_day), 70, height);
-                const ny = map(Date.parse(end_time), Date.parse(midnight), Date.parse(next_day), 70, height);
-                
-                noStroke();
-                fill(0, 0, 255);
-                rectMode(CORNERS);
-                
-                rect(i * (width / numberofdays) + 40, py, (i + 1) * (width / numberofdays) + 40, ny, 20);
-            }
-        }
-    }
-}
-
-function sameDate(date1, date2) {
-    if (date1.getFullYear() == date2.getFullYear() && date1.getMonth() == date2.getMonth() && date1.getDate() == date2.getDate()) {
-        return true;
-    }
-    return false;
-}
