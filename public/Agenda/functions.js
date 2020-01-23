@@ -1,3 +1,4 @@
+
 function draw_clumnlines(i, bool1, bool2) {
 
     const column = (i - 0.5) * width / numberofdays + 165;
@@ -32,30 +33,36 @@ function draw_rowlines() {
 }
 
 function create_buttons() {
+    
     button_pyear = createButton('Prévious');
-    button_pyear.position(15, 15);
+    button_pyear.position(15, 115);
     button_pyear.mousePressed(pyear);
 
     button_nyear = createButton('Next');
-    button_nyear.position(width - 30, 15);
+    button_nyear.position(width - 30, 115);
     button_nyear.mousePressed(nyear);
 
     button_pmonths = createButton('Prévious');
-    button_pmonths.position(15, 45);
+    button_pmonths.position(15, 145);
     button_pmonths.mousePressed(pmonths);
 
     button_nmonths = createButton('Next');
-    button_nmonths.position(width - 30, 45);
+    button_nmonths.position(width - 30, 145);
     button_nmonths.mousePressed(nmonths);
 
     button_pday = createButton('Prévious');
-    button_pday.position(15, 75);
+    button_pday.position(15, 175);
     button_pday.mousePressed(pday);
 
     button_nday = createButton('Next');
-    button_nday.position(width - 30, 75);
+    button_nday.position(width - 30, 175);
     button_nday.mousePressed(nday);
+
+    button_sendtime = createButton('Send Time Data');
+    button_sendtime.position(width/2, 20);
+    button_sendtime.mousePressed(sendData);
 }
+   
 
 function pday() {
     date = new Date(Date.parse(date) - increment);
@@ -162,4 +169,34 @@ function sameDate(date1, date2) {
         return true;
     }
     return false;
+}
+
+async function sendData(){
+
+    console.log('Sending');
+
+    timeset = Date.parse(new Date(Date.now()));
+   
+
+        const data = {
+            time: timeset
+        }
+        const sendoptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: JSON.stringify(data)
+        }
+       const response = await fetch('/receveEvenements', sendoptions);
+       const json = await response.json();
+
+       const time = [];
+       for(let i = 0; i < json.times.length; i++){
+        time.push(new Date(json.times[i].time));
+       }
+       
+       console.log(time);
+
+        send = false;
 }

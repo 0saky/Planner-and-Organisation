@@ -1,5 +1,3 @@
-
-
 const lang = /*"fr-FR";*/   "en-US";
 const numberofdays = 6;
 let evenements = [{
@@ -44,7 +42,7 @@ const increment = 86400000;
 
 function setup() {
     //Creating Canvas
-    canvas = createCanvas(windowWidth - 20, windowHeight - 20);
+    canvas = createCanvas(windowWidth - 20, windowHeight - 100);
     // background(220);
 
     //Get current date
@@ -156,8 +154,7 @@ function draw() {
 
     draw_now();
 
-
-
+    
 }
 
 
