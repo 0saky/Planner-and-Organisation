@@ -42,7 +42,7 @@ for(let i = 0; i < evenements.length; i++){
 
 app.post('/receveEvenements', (request, response) => {
     const receved = request.body;
-    
+
 
 
     const start = receved.start_date;
@@ -53,13 +53,13 @@ app.post('/receveEvenements', (request, response) => {
     let to_send = [];
 
     let data = database.getAllData();
-    
-    for(let i = 0; i < data.length; i++){
-       
+
+    for (let i = 0; i < data.length; i++) {
+
         const time_start = Date.parse(new Date(data[i].evenement.starting));
         const time_end = Date.parse(new Date(data[i].evenement.ending));
-       
-        if(time_end > start && time_start < end){
+
+        if (time_end > start && time_start < end) {
             to_send.push(data[i].evenement);
         }
     }
@@ -67,6 +67,20 @@ app.post('/receveEvenements', (request, response) => {
         status: 'Sucessfuly receved this :',
         data: to_send
     });
-    
+
     console.log('Response send : ', to_send);
+});
+
+app.post('/addEvenements', (request, response) => {
+    const receved = request.body;
+
+    console.log(receved);
+
+    database.insert({time: Date.parse(new Date(Date.now())), evenement: receved})
+
+    response.json({
+        status: 'Sucessfuly receved',
+    });
+
+    console.log('Response send');
 })
