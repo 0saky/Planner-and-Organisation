@@ -1,36 +1,7 @@
+
 const lang = /*"fr-FR";*/   "en-US";
 const numberofdays = 6;
-let evenements = [{
-    title: "Working",
-    starting: "2020-01-13T08:24:00",
-    ending: "2020-01-13T10:45:00",
-    category: "Work"
-},
-{
-    title: "Sleeping",
-    starting: "2020-01-11T22:46:00",
-    ending: "2020-01-12T10:15:00",
-    category: "Sleep"
-},
-{
-    title: "Watching videos",
-    starting: "2020-01-13T11:00:00",
-    ending: "2020-01-13T12:35:00",
-    category: "Divertisment"
-},
-{
-    title: "Doing push-ups",
-    starting: "2020-01-13T14:30:00",
-    ending: "2020-01-13T15:00:00",
-    category: "Sport"
-},
-{
-    title: "Sleeping",
-    starting: "2020-01-12T23:46:00",
-    ending: "2020-01-13T07:30:00",
-    category: "Sleep"
-}
-]
+let evenements = [];
 let day;
 let options;
 let canvas;
@@ -38,19 +9,20 @@ let days_long;
 let days_array;
 //Number of miliseconds in a day;
 const increment = 86400000;
+let sync = false;
 
 
 function setup() {
     //Creating Canvas
-    canvas = createCanvas(windowWidth - 20, windowHeight - 100);
+    canvas = createCanvas(windowWidth - 20, windowHeight - 20);
     // background(220);
-
+    
     //Get current date
     date = new Date(Date.now());
 
     create_buttons();
 
-
+    
 }
 
 function draw() {
@@ -154,6 +126,13 @@ function draw() {
 
     draw_now();
 
+    draw_text();
+
+    
+    if(!sync){
+        SyncData();
+        sync = true;
+    }
     
 }
 

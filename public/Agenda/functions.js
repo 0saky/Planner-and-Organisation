@@ -29,69 +29,97 @@ function draw_rowlines() {
         textAlign(LEFT);
         fill(0);
         text(i * 4 + "h", 0, y);
+        
     }
+}
+
+function draw_text() {
+
+    textSize(30);
+    noStroke();
+    fill(0);
+
+    text("Agenda", 0, 30);
+
+    
 }
 
 function create_buttons() {
     
     button_pyear = createButton('Prévious');
-    button_pyear.position(15, 115);
+    button_pyear.position(15, 15);
     button_pyear.mousePressed(pyear);
 
     button_nyear = createButton('Next');
-    button_nyear.position(width - 30, 115);
+    button_nyear.position(width - 30, 15);
     button_nyear.mousePressed(nyear);
 
     button_pmonths = createButton('Prévious');
-    button_pmonths.position(15, 145);
+    button_pmonths.position(15, 45);
     button_pmonths.mousePressed(pmonths);
 
     button_nmonths = createButton('Next');
-    button_nmonths.position(width - 30, 145);
+    button_nmonths.position(width - 30, 45);
     button_nmonths.mousePressed(nmonths);
 
     button_pday = createButton('Prévious');
-    button_pday.position(15, 175);
+    button_pday.position(15, 75);
     button_pday.mousePressed(pday);
 
     button_nday = createButton('Next');
-    button_nday.position(width - 30, 175);
+    button_nday.position(width - 30, 75);
     button_nday.mousePressed(nday);
 
-    button_sendtime = createButton('Send Time Data');
-    button_sendtime.position(width/2, 20);
-    button_sendtime.mousePressed(sendData);
+    button_home = createButton('Home');
+    button_home.position(120, 20);
+    button_home.attribute('onclick', "window.location.href = '/..';");
+
+    button_createEvenement = createButton('Create New Evenement');
+    button_createEvenement.position(180, 20);
+    button_createEvenement.attribute('onclick', "window.location.href = 'CreateEvenement';");
+
+    button_sync = createButton('Sync');
+    button_sync.position(width/2, 20);
+    button_sync.mousePressed(SyncData);
 }
+
+
    
 
 function pday() {
     date = new Date(Date.parse(date) - increment);
+    SyncData();
 }
 
 function nday() {
     date = new Date(Date.parse(date) + increment);
+    SyncData();
 }
 
 
 function pyear() {
 
     date = new Date(date.getFullYear() - 1, 0, 1);
+    SyncData();
 
 }
 function nyear() {
 
     date = new Date(date.getFullYear() + 1, 0, 1);
+    SyncData();
 
 }
 
 function pmonths() {
 
     date = new Date(date.getFullYear(), date.getMonth() - 1, 1);
+    SyncData();
 
 }
 function nmonths() {
 
     date = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+    SyncData();
 
 }
 
@@ -171,15 +199,19 @@ function sameDate(date1, date2) {
     return false;
 }
 
-async function sendData(){
+async function SyncData(){
 
     console.log('Sending');
+
+    const start_time = getfirstTime();
+    const end_time = getEndTime();
 
     timeset = Date.parse(new Date(Date.now()));
    
 
         const data = {
-            time: timeset
+            start_date: start_time,
+            end_date: end_time            
         }
         const sendoptions = {
             method: 'POST',
@@ -191,12 +223,19 @@ async function sendData(){
        const response = await fetch('/receveEvenements', sendoptions);
        const json = await response.json();
 
-       const time = [];
-       for(let i = 0; i < json.times.length; i++){
-        time.push(new Date(json.times[i].time));
-       }
-       
-       console.log(time);
+       const received_data = json.data;
 
-        send = false;
+       for(let i = 0; i < received_data.length; i++){
+           evenements.push(received_data[i]);
+       }
+       console.log(evenements);
+       
+}
+
+function getfirstTime() {
+    return Date.parse(days_array[0]);
+}
+
+function getEndTime() {
+    return Date.parse(days_array[numberofdays-1]);
 }
