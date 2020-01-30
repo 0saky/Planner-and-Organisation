@@ -72,6 +72,8 @@ function draw() {
 
     draw_past();
 
+    drawrect();
+
     let conty = 0;
     let contm = 0;
 
@@ -128,6 +130,8 @@ function draw() {
     
 
     draw_now();
+
+    
 
     draw_text();
 

@@ -2,8 +2,8 @@ const lang = /*"fr-FR";*/   "en-US";
 const categories = ["", "Sport", "Divertisment","Sleep", "In Class", "Transporation"]
 let options;
 const today = new Date( Date.now() );
-let day = today;
-let day_end =today;
+let dayStart = today;
+let dayEnd = today;
 let Modifying = false;
 let myStorage;
 let evenement = {};
@@ -35,8 +35,6 @@ function draw(){
 
     draw_text();
 
-    
-    
     refreshEvenement();
 
 }

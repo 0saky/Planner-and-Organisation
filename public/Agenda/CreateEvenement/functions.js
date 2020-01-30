@@ -11,13 +11,21 @@ function create_buttons() {
     button_Agenda.position(410, 20);
     button_Agenda.attribute('onclick', "window.location.href = '..';");
 
-    button_pday = createButton('<');
-    button_pday.position(70, 65);
-    button_pday.mousePressed(pday);
+    button_pdayS = createButton('<');
+    button_pdayS.position(70, 65);
+    button_pdayS.mousePressed(pdayS);
 
-    button_nday = createButton('>');
-    button_nday.position(375, 65);
-    button_nday.mousePressed(nday);
+    button_ndayS = createButton('>');
+    button_ndayS.position(385, 65);
+    button_ndayS.mousePressed(ndayS);
+
+    button_pdayN = createButton('<<');
+    button_pdayN.position(425, 65);
+    button_pdayN.mousePressed(pdayN);
+
+    button_ndayN = createButton('>>');
+    button_ndayN.position(750, 65);
+    button_ndayN.mousePressed(ndayN);
 
     button_save = createButton('Save');
     button_save.position(200, 350);
@@ -73,8 +81,10 @@ function draw_text() {
 
 
     options = { weekday: "long", year: "numeric", month: "long", day: "numeric" }
-    const write = new Intl.DateTimeFormat(lang, options).format(day);
+    let write = new Intl.DateTimeFormat(lang, options).format(dayStart);
     text(write, 100, 75);
+     write = new Intl.DateTimeFormat(lang, options).format(dayEnd);
+    text(write, 465, 75);
 
     text("Starting Time : " + floor(slider_start.value() / 60) + ':' + slider_start.value() % 60, 0, 115);
 
@@ -93,18 +103,28 @@ function draw_text() {
 
 }
 
-function pday() {
-    day.setDate(day.getDate() - 1);
+function pdayS() {
+    dayStart = new Date(Date.parse(dayStart) - 86400000);
     fnxdate();
 }
 
-function nday() {
-    day.setDate(day.getDate() + 1);
+function ndayS() {
+    dayStart = new Date(Date.parse(dayStart) + 86400000);
+    fnxdate();
+}
+
+function pdayN() {
+    dayEnd = new Date(Date.parse(dayEnd) - 86400000);
+    fnxdate();
+}
+
+function ndayN() {
+    dayEnd = new Date(Date.parse(dayEnd) + 86400000);
     fnxdate();
 }
 
 function fnxdate() {
-    console.log('Date is: ', day);
+    console.log('Date is: ', dayStart, dayEnd);
 }
 
 function start_time() {
@@ -129,13 +149,7 @@ function notes_input() {
 
 function fxnSave() {
 
-    starting = new Date(day);
-    starting.setHours(floor(slider_start.value() / 60));
-    starting.setMinutes(slider_start.value() % 60);
-
-    ending = new Date(day);
-    ending.setHours(floor(slider_end.value() / 60));
-    ending.setMinutes(slider_end.value() % 60);
+    
     
 
     refreshEvenement();
@@ -222,6 +236,13 @@ function checkForModification(){
 
 function refreshEvenement(){
 
+    starting = new Date(dayStart);
+    starting.setHours(floor(slider_start.value() / 60));
+    starting.setMinutes(slider_start.value() % 60);
+
+    ending = new Date(dayEnd);
+    ending.setHours(floor(slider_end.value() / 60));
+    ending.setMinutes(slider_end.value() % 60);
     
         evenement.title = input_title.value(),
         evenement.starting = starting,
@@ -235,11 +256,11 @@ function setButtonValues(){
     input_title.value(evenement.title);
     input_notes.value(evenement.notes);
 
-    day = new Date(evenement.starting);
-    day_end = new Date(evenement.ending);
+    dayStart = new Date(evenement.starting);
+    dayEnd = new Date(evenement.ending);
 
-    const s = day.getHours()*60 + day.getMinutes();
-    const e = day_end.getHours()*60 + day_end.getMinutes()
+    const s = dayStart.getHours()*60 + dayStart.getMinutes();
+    const e = dayEnd.getHours()*60 + dayEnd.getMinutes()
 
     slider_start.value(s);
     slider_end.value(e);

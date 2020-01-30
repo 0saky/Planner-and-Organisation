@@ -79,9 +79,7 @@ function create_buttons() {
     button_createEvenement.position(180, 20);
     button_createEvenement.attribute('onclick', "window.location.href = 'CreateEvenement';");
 
-    button_sync = createButton('Sync');
-    button_sync.position(width/2, 20);
-    button_sync.mousePressed(SyncData);
+    
 }
 
 
@@ -161,31 +159,16 @@ function draw_past() {
 
                 if(Date.parse(start_time) < Date.parse(midnight)){
                     start_time = midnight;
-                    a = 0; 
+                    a = 30; 
                 }
                 if(Date.parse(end_time) > Date.parse(next_day)){
                     end_time = next_day;
-                    b = 0;
+                    b = 00;
+
                 }
                
                 const py = map(Date.parse(start_time), Date.parse(midnight), Date.parse(next_day), 70, height);
                 const ny = map(Date.parse(end_time), Date.parse(midnight), Date.parse(next_day), 70, height);
-                
-                noStroke();
-               
-                fill(255, 255, 0);
-
-                if(evenements[j].category == "Sleep"){
-                    fill(0, 0, 255);
-                } else if(evenements[j].category == "In Class"){
-                    fill(255, 0, 0);
-                } else if(evenements[j].category == "Divertisment"){
-                    fill(255, 0, 255);
-                } else if(evenements[j].category == "Sport"){
-                    fill(0, 255, 0);
-                }
-
-                rectMode(CORNERS);
 
                 evenements_onpagePosition.push({
                     evenement_id: j,
@@ -195,18 +178,35 @@ function draw_past() {
                     ny: ny
                 })
 
-                let numero = 0;
-                
-                while(evenements_onpagePosition[numero].evenement_id != j){
-                    numero++;
-                }
-                
-                const position = evenements_onpagePosition[numero];
-
-                rect(position.px, position.py, position.nx, position.ny, a, a, b, b);
             }
         }
     }
+}
+
+function drawrect(){
+    noStroke();
+               
+    for(let i = 0; i < evenements_onpagePosition.length; i++){
+
+            fill(255, 255, 0);
+
+        if(evenements[evenements_onpagePosition[i].evenement_id].category == "Sleep"){
+            fill(0, 0, 255);
+        } else if(evenements[evenements_onpagePosition[i].evenement_id].category == "In Class"){
+            fill(255, 0, 0);
+        } else if(evenements[evenements_onpagePosition[i].evenement_id].category == "Divertisment"){
+            fill(255, 0, 255);
+        } else if(evenements[evenements_onpagePosition[i].evenement_id].category == "Sport"){
+            fill(0, 255, 0);
+        }
+
+        rectMode(CORNERS);
+
+        const position = evenements_onpagePosition[i];
+        
+        rect(position.px, position.py, position.nx, position.ny, 20, 20, 20, 20);
+    }
+    
 }
 
 function sameDate(date1, date2) {
@@ -250,11 +250,19 @@ async function SyncData(){
 }
 
 function getfirstTime() {
-    return Date.parse(days_array[0]);
+    let temp = new Date(days_array[0]);
+    temp.setHours(0);
+    temp.setMinutes(0);
+    return Date.parse(temp);
 }
 
 function getEndTime() {
-    return Date.parse(days_array[numberofdays-1]);
+    let temp = new Date(Date.parse(days_array[numberofdays-1]) + 86400000);
+    
+    temp.setHours(0);
+    temp.setMinutes(0);
+    return Date.parse(temp);
+    
 }
 
 function mouse_over(){
