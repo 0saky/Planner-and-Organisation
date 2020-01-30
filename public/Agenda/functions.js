@@ -1,3 +1,4 @@
+//import { text } from "express";
 
 function draw_clumnlines(i, bool1, bool2) {
 
@@ -176,7 +177,7 @@ function draw_past() {
 
                 if(evenements[j].category == "Sleep"){
                     fill(0, 0, 255);
-                } else if(evenements[j].category == "Work"){
+                } else if(evenements[j].category == "In Class"){
                     fill(255, 0, 0);
                 } else if(evenements[j].category == "Divertisment"){
                     fill(255, 0, 255);
@@ -185,8 +186,24 @@ function draw_past() {
                 }
 
                 rectMode(CORNERS);
+
+                evenements_onpagePosition.push({
+                    evenement_id: j,
+                    px: i * (width / numberofdays) + 40,
+                    py: py,
+                    nx: (i + 1) * (width / numberofdays) + 40,
+                    ny: ny
+                })
+
+                let numero = 0;
                 
-                rect(i * (width / numberofdays) + 40, py, (i + 1) * (width / numberofdays) + 40, ny, a, a, b, b);
+                while(evenements_onpagePosition[numero].evenement_id != j){
+                    numero++;
+                }
+                
+                const position = evenements_onpagePosition[numero];
+
+                rect(position.px, position.py, position.nx, position.ny, a, a, b, b);
             }
         }
     }
@@ -238,4 +255,70 @@ function getfirstTime() {
 
 function getEndTime() {
     return Date.parse(days_array[numberofdays-1]);
+}
+
+function mouse_over(){
+   // console.log(mouseX, mouseY);
+    for (let i = 0; i < evenements_onpagePosition.length; i++){
+        const position = evenements_onpagePosition[i];
+        
+        if(mouseX > position.px && mouseX < position.nx && mouseY > position.py && mouseY < position.ny){
+            //console.log(evenements[position.evenement_id]);
+            return evenements[position.evenement_id];
+            
+        }
+    }
+
+    return "NaN";
+
+}
+
+function mouse_overEvenementInfo(){
+    const response = mouse_over();
+    //console.log("checking");
+    if(response != "NaN"){
+        //console.log("On a evenement")
+        draw_evenementInfo(response);
+    }
+}
+
+function mouseReleased(){
+    const response = mouse_over();
+    if(response != "NaN"){
+        //console.log("Going to modify : ", response);
+        localStorage.clear();
+        localStorage.setItem("ToModify", JSON.stringify(response));
+        window.location.href = 'CreateEvenement';
+    }
+}
+
+function draw_evenementInfo(Evenement_description){
+    console.log(Evenement_description);
+    translate(mouseX, mouseY);
+
+    let rect_length = Evenement_description.title.length*15;
+    if(rect_length < 100){
+        rect_length = 100;
+    }
+
+    rectMode(CORNER);
+    fill(255, 255, 255, 210);
+    rect(0, 0, rect_length, 100, 10, 10);
+
+    fill(0);
+    textSize(20);
+    text(Evenement_description.title, 20, 20);
+    textSize(15);
+
+    options = { hour: "2-digit", minute: "2-digit" }
+    let start_time_Event = new Date(Evenement_description.starting);
+    let end_time_Event = new Date(Evenement_description.ending);
+    let write = new Intl.DateTimeFormat(lang, options).format(start_time_Event);
+    text(write, 20, 45);
+    write = new Intl.DateTimeFormat(lang, options).format(end_time_Event);
+    text(write, 20, 60);
+
+    textSize(15);
+    text(Evenement_description.notes, 20, 80);
+    
 }

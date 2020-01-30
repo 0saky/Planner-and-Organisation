@@ -2,6 +2,7 @@
 const lang = /*"fr-FR";*/   "en-US";
 const numberofdays = 6;
 let evenements = [];
+let evenements_onpagePosition = [];
 let day;
 let options;
 let canvas;
@@ -31,6 +32,8 @@ function draw() {
 
     days_long = [];
     days_array = [];
+
+    evenements_onpagePosition = [];
 
     for (let i = 0; i < numberofdays; i++) {
 
@@ -127,6 +130,8 @@ function draw() {
     draw_now();
 
     draw_text();
+
+    mouse_overEvenementInfo();
 
     
     if(!sync){

@@ -60,6 +60,7 @@ app.post('/receveEvenements', (request, response) => {
         const time_end = Date.parse(new Date(data[i].evenement.ending));
 
         if (time_end > start && time_start < end) {
+            data[i].evenement.id = data[i]._id;
             to_send.push(data[i].evenement);
         }
     }
@@ -77,6 +78,30 @@ app.post('/addEvenements', (request, response) => {
     console.log(receved);
 
     database.insert({time: Date.parse(new Date(Date.now())), evenement: receved})
+
+    response.json({
+        status: 'Sucessfuly receved',
+    });
+
+    console.log('Response send');
+})
+
+app.post('/ModifiedEvenement', (request, response) => {
+    const receved = request.body;
+
+    console.log(receved);
+
+    const time = Date.parse(new Date(Date.now()))
+
+    const evenement = {
+        title: receved.title,
+        starting: receved.starting,
+        ending: receved.ending,
+        category: receved.category,
+        notes: receved.notes
+    }
+
+    database.update({ _id: receved.id }, {time: time, evenement: evenement}, {});
 
     response.json({
         status: 'Sucessfuly receved',
