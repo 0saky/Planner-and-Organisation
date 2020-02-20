@@ -79,6 +79,10 @@ function create_buttons() {
     button_createEvenement.position(180, 20);
     button_createEvenement.attribute('onclick', "window.location.href = 'CreateEvenement';");
 
+    button_createEvenement = createButton('Manage Categories');
+    button_createEvenement.position(350, 20);
+    button_createEvenement.attribute('onclick', "window.location.href = 'ManageCategories';");
+
     
 }
 

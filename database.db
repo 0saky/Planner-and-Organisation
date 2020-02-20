@@ -25,3 +25,10 @@
 {"time":1582151861000,"evenement":{"title":"Sieste","starting":"2020-02-19T14:45:51.553Z","ending":"2020-02-19T16:30:51.553Z","category":"Sleep","notes":""},"_id":"srxRCGqFjNU0TugY"}
 {"time":1580387621000,"evenement":{"title":"Bike and RER","starting":"2020-01-30T06:10:16.122Z","ending":"2020-01-30T07:05:16.122Z","category":"Transporation","notes":""},"_id":"xpa5SiUJfvqalz7D"}
 {"time":1579985832000,"evenement":{"title":"JJHJS","starting":"2020-01-23T04:18:55.357Z","ending":"2020-01-23T12:49:55.357Z","category":"Sport","notes":"JKjdkslfjs"},"_id":"z0g1gDhSnziBt1Mv"}
+{"time":1582202659000,"evenement":{"title":"Travailler sur projet","starting":"2020-02-19T10:00:35.882Z","ending":"2020-02-19T12:00:35.882Z","category":"Work","notes":""},"_id":"5BPW1kmJwdCp28az"}
+{"time":1582202673000,"evenement":{"title":"Travailler sur projet","starting":"2020-02-20T10:00:35.000Z","ending":"2020-02-20T12:00:35.000Z","category":"Sleep","notes":""},"_id":"5BPW1kmJwdCp28az"}
+{"time":1582202687000,"evenement":{"title":"Travailler sur projet","starting":"2020-02-20T10:00:35.000Z","ending":"2020-02-20T12:00:35.000Z","category":"Work","notes":""},"_id":"5BPW1kmJwdCp28az"}
+{"time":1582202872000,"evenement":{"title":"Travailler sur projet","starting":"2020-02-20T10:41:35.000Z","ending":"2020-02-20T12:00:35.000Z","category":"Work","notes":""},"_id":"5BPW1kmJwdCp28az"}
+{"time":1582202959000,"evenement":{"title":"Bus","starting":"2020-02-20T10:00:11.213Z","ending":"2020-02-20T10:30:11.213Z","category":"Transporation","notes":"Come back from CRR with Thomas, Arthur, Valentine"},"_id":"XCCkJ6vmsSIGP9GU"}
+{"time":1582203497000,"evenement":{"title":"Go searching Computer at FNAC","starting":"2020-02-19T12:47:58.000Z","ending":"2020-02-19T13:51:58.000Z","category":"Sport","notes":"By bike to FNAC Montparnass 19:43 and 22:13 for 6 kms"},"_id":"3TED4Hq7kUQl5EmQ"}
+{"time":1582204505000,"evenement":{"title":"Went searching Computer at FNAC","starting":"2020-02-19T12:47:58.000Z","ending":"2020-02-19T13:51:58.000Z","category":"Sport","notes":"By bike to FNAC Montparnass 19:43 and 22:13 for 6 kms"},"_id":"3TED4Hq7kUQl5EmQ"}

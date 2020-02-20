@@ -40,11 +40,6 @@ function create_inputs() {
     input_title.changed(title_input);
     input_title.size(300, 30);
 
-    input_category = createInput('Create New Category');
-    input_category.position(220, 195);
-    input_category.changed(category_input);
-    input_category.size(200, 25);
-
     input_notes = createInput('');
     input_notes.position(80, 230);
     input_notes.changed(notes_input);
@@ -309,27 +304,4 @@ async function requestCategories(){
        update_selecter();
 
        
-}
-
-async function addCategoty(data) {
-
-    const ToSend = {in: data};
-    console.log('Sending : ', ToSend);
-    const sendoptions = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(ToSend)
-    }
-    const response = await fetch('/addCategorie', sendoptions);
-    const json = await response.json();
-
-    console.log(json);
-
-    if(json.status == 'Sucessfuly receved'){
-         requestCategories();
-    }
-
-
 }
