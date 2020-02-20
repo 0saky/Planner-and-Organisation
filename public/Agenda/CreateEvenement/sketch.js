@@ -1,5 +1,5 @@
 const lang = /*"fr-FR";*/   "en-US";
-const categories = ["", "Sport", "Divertisment","Sleep", "In Class", "Transporation"]
+let categories = []
 let options;
 const today = new Date( Date.now() );
 let dayStart = today;
@@ -16,6 +16,8 @@ let ending;
 function setup() {
 
     canvas = createCanvas(windowWidth - 20, windowHeight - 20);
+
+    requestCategories();
 
     create_buttons();
 

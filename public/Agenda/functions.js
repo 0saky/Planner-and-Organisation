@@ -193,11 +193,15 @@ function drawrect(){
         if(evenements[evenements_onpagePosition[i].evenement_id].category == "Sleep"){
             fill(0, 0, 255);
         } else if(evenements[evenements_onpagePosition[i].evenement_id].category == "In Class"){
-            fill(255, 0, 0);
+            fill(255, 0, 255);
         } else if(evenements[evenements_onpagePosition[i].evenement_id].category == "Divertisment"){
             fill(255, 0, 255);
         } else if(evenements[evenements_onpagePosition[i].evenement_id].category == "Sport"){
             fill(0, 255, 0);
+        } else if(evenements[evenements_onpagePosition[i].evenement_id].category == "Exam"){
+            fill(255, 0, 0);
+        } else if(evenements[evenements_onpagePosition[i].evenement_id].category == "Work"){
+            fill(0, 255, 255);
         }
 
         rectMode(CORNERS);
@@ -330,3 +334,4 @@ function draw_evenementInfo(Evenement_description){
     text(Evenement_description.notes, 20, 80);
     
 }
+

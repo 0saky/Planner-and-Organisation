@@ -10,6 +10,11 @@ const Datastore = require('nedb');
 let database = new Datastore('database.db');
 database.loadDatabase();
 
+const CategoriesStore = require('nedb');
+let categories = new CategoriesStore('Categories.db');
+categories.loadDatabase();
+
+
 /*
 let evenements = [
     {
@@ -84,7 +89,7 @@ app.post('/addEvenements', (request, response) => {
     });
 
     console.log('Response send');
-})
+});
 
 app.post('/ModifiedEvenement', (request, response) => {
     const receved = request.body;
@@ -108,4 +113,44 @@ app.post('/ModifiedEvenement', (request, response) => {
     });
 
     console.log('Response send');
-})
+});
+
+app.post('/ListOfCategories', (request, response) => {
+    
+    let to_send = [];
+
+    let data = categories.getAllData();
+
+    for (let i = 0; i < data.length; i++) {
+
+        
+        to_send.push(data[i].category);
+        
+    }
+    response.json({
+        status: 'Sucessfuly receved this :',
+        data: to_send
+    });
+
+    console.log('Response send : ', to_send);
+});
+
+
+
+app.post('/addCategorie', (request, response) => {
+    
+    console.log("Receved a request to add en Evenement")
+    console.log(request.body.in);
+
+    const receved = request.body.in;
+
+    
+
+    categories.insert({time: Date.parse(new Date(Date.now())), category: receved})
+
+    response.json({
+        status: 'Sucessfuly receved',
+    });
+
+    console.log('Response send');
+});
