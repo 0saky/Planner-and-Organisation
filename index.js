@@ -117,6 +117,7 @@ app.post('/ModifiedEvenement', (request, response) => {
 
 app.post('/ListOfCategories', (request, response) => {
     
+    console.log("Receved a request for list of categories: ")
     let to_send = [];
 
     let data = categories.getAllData();

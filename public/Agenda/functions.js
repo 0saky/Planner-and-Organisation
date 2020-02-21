@@ -186,27 +186,34 @@ function draw_past() {
         }
     }
 }
+function getColor(category){
+    
+    if(category == "Sleep"){
+        return color(0, 0, 255);
+    } else if (category == "Sport"){
+        return color(0, 255, 0);
+    } else if (category == "In Class"){
+        return color(255, 0, 255);
+    } else if (category == "Divertisment"){
+        return color(0, 255, 255);
+    } else if (category == "Work"){
+        return color(255, 255, 0);
+    } else if (category == "Transporation"){
+        return color(127, 0, 127);
+    } else if (category == "Exam"){
+        return color(255, 0, 0);
+    }
+    return color(0);
+}
 
 function drawrect(){
     noStroke();
                
     for(let i = 0; i < evenements_onpagePosition.length; i++){
 
-            fill(255, 255, 0);
+            const color = getColor(evenements[evenements_onpagePosition[i].evenement_id].category);
 
-        if(evenements[evenements_onpagePosition[i].evenement_id].category == "Sleep"){
-            fill(0, 0, 255);
-        } else if(evenements[evenements_onpagePosition[i].evenement_id].category == "In Class"){
-            fill(255, 0, 255);
-        } else if(evenements[evenements_onpagePosition[i].evenement_id].category == "Divertisment"){
-            fill(255, 0, 255);
-        } else if(evenements[evenements_onpagePosition[i].evenement_id].category == "Sport"){
-            fill(0, 255, 0);
-        } else if(evenements[evenements_onpagePosition[i].evenement_id].category == "Exam"){
-            fill(255, 0, 0);
-        } else if(evenements[evenements_onpagePosition[i].evenement_id].category == "Work"){
-            fill(0, 255, 255);
-        }
+        fill(color);
 
         rectMode(CORNERS);
 
