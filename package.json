@@ -18,7 +18,6 @@
   "homepage": "https://github.com/0saky/Planner-and-Organisation#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "nedb": "^1.8.0",
-    "spectrum-colorpicker2": "^2.0.0"
+    "nedb": "^1.8.0"
   }
 }
