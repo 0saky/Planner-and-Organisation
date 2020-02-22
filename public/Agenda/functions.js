@@ -186,27 +186,21 @@ function draw_past() {
         }
     }
 }
-function getColor(category){
+
+
+    function getColor(init){
     
-    if(category == "Sleep"){
-        return color(0, 0, 255);
-    } else if (category == "Sport"){
-        return color(0, 255, 0);
-    } else if (category == "In Class"){
-        return color(255, 0, 255);
-    } else if (category == "Divertisment"){
-        return color(0, 255, 255);
-    } else if (category == "Work"){
-        return color(255, 255, 0);
-    } else if (category == "Transporation"){
-        return color(127, 0, 127);
-    } else if (category == "Exam"){
-        return color(255, 0, 0);
+    for(let category of categories){
+        if(category.name == init){
+            //console.log(category.color);
+            return category.color;
+        }
     }
-    return color(0);
+
+    return 0;
 }
 
-function drawrect(){
+async function drawrect(){
     noStroke();
                
     for(let i = 0; i < evenements_onpagePosition.length; i++){
@@ -346,3 +340,28 @@ function draw_evenementInfo(Evenement_description){
     
 }
 
+
+async function requestCategories(){
+
+    console.log('Sending');
+
+    
+        const data = {};
+        const sendoptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+                },
+            body: JSON.stringify(data)
+        }
+       const response = await fetch('/ListOfCategories', sendoptions);
+       const json = await response.json();
+
+       const received_data = json.data;
+
+       
+       console.log(received_data);
+
+       categories = received_data;
+      
+}

@@ -64,9 +64,10 @@ function create_selecter() {
     update_selecter();
 }
 
-function update_selecter() {
-    for (let i = 0; i < categories.length; i++) {
-        selecter_category.option(categories[i]);
+async function update_selecter() {
+
+    for (let category of categories) {
+        selecter_category.option(category.name);
     }
     selecter_category.changed(fnxcategory);
 }
@@ -158,9 +159,6 @@ function category_input() {
 
 function fxnSave() 
 {
-
-    
-    
 
     refreshEvenement();
 

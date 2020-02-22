@@ -39,48 +39,54 @@ async function requestCategories(){
       
 }
 
-function getColor(category){
+// function getColor(category){
     
-    if(category == "Sleep"){
-        return color(0, 0, 255);
-    } else if (category == "Sport"){
-        return color(0, 255, 0);
-    } else if (category == "In Class"){
-        return color(255, 0, 255);
-    } else if (category == "Divertisment"){
-        return color(0, 255, 255);
-    } else if (category == "Work"){
-        return color(255, 255, 0);
-    } else if (category == "Transporation"){
-        return color(127, 0, 127);
-    } else if (category == "Exam"){
-        return color(255, 0, 0);
-    }
-    return color(0);
-}
+//     if(category == "Sleep"){
+//         return color(0, 0, 255);
+//     } else if (category == "Sport"){
+//         return color(0, 255, 0);
+//     } else if (category == "In Class"){
+//         return color(255, 0, 255);
+//     } else if (category == "Divertisment"){
+//         return color(0, 255, 255);
+//     } else if (category == "Work"){
+//         return color(255, 255, 0);
+//     } else if (category == "Transporation"){
+//         return color(127, 0, 127);
+//     } else if (category == "Exam"){
+//         return color(255, 0, 0);
+//     }
+//     return color(0);
+// }
 
 function create_visualisation() {
 
-    for(let i = 0; i < categories.length; i++){
+    const nombreCat = Object.keys(categories).length;
 
-        console.log("making: " + categories[i]);
+    let i = 0;
 
-        const y = (i+1)*(height/(categories.length+2));
+    for(category of categories){
 
-        const color = getColor(categories[i]);
+        console.log("making: " + category.name);
+
+        const y = (i+1)*(height/(nombreCat+2));
+
+        const color = category.color;
 
         fill(0);
         noStroke();
         textSize(25);
-        text(categories[i], 80, y);
+        text(category.name, 80, y);
 
         fill(color);
         ellipse(0, y, 80);
 
-        positions[categories[i]] = [0, y-40, 500, y+40];
+        positions[category.name] = [0, y-40, 500, y+40];
+
+        i++;
     }
 
-    const y = (categories.length+1)*(height/(categories.length+2));
+    const y = (nombreCat+1)*(height/(nombreCat+2));
 
     fill(0);
 
@@ -139,10 +145,14 @@ function create_Addcategory(){
     input_title.changed(title_input);
 
     textSize(25);
-   // text("Color :", 500, 150);
+    text("Color :", 500, 150);
+
+    colorpicker = createColorPicker('#ff0000');
+    colorpicker.position(600, 150);
+    colorpicker.input(givecolor);
     
    button_save = createButton('Save');
-   button_save.position(600, 150);
+   button_save.position(600, 300);
    button_save.mousePressed(fxnSave);
 
 }
@@ -151,15 +161,19 @@ function title_input(){
     console.log('Title is: ', this.value());
 }
 
+function givecolor(){
+    console.log("Color is: " + this.value());
+}
+
 function fxnSave(){
 
-addCategory(input_title.value());
+addCategory(input_title.value(), colorpicker.value());
 
 }
 
-async function addCategory(data) {
+async function addCategory(name, color) {
 
-    const ToSend = {in: data};
+    const ToSend = {category: name, color: color};
     console.log('Sending : ', ToSend);
     const sendoptions = {
         method: 'POST',

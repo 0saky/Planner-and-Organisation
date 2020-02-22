@@ -1,5 +1,5 @@
 const lang = /*"fr-FR";*/   "en-US";
-let categories = []
+let categories = {};
 let options;
 const today = new Date( Date.now() );
 let dayStart = today;

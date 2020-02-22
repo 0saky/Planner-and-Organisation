@@ -3,6 +3,7 @@ const lang = /*"fr-FR";*/   "en-US";
 const numberofdays = 6;
 let evenements = [];
 let evenements_onpagePosition = [];
+let categories = {};
 let day;
 let options;
 let canvas;
@@ -23,6 +24,7 @@ function setup() {
 
     create_buttons();
 
+    requestCategories();
     
 }
 

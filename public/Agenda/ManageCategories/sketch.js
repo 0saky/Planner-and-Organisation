@@ -1,4 +1,4 @@
-let categories = [];
+let categories = {};
 let positions = {};
 
 function setup(){

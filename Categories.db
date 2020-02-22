@@ -1,10 +1,8 @@
-{"time":1582197631000,"category":"Sleep","_id":"15pPMIvwRt5dvrbI"}
-{"time":1582197969000,"category":"Work","_id":"1dQY6APhVtUin8Z8"}
-{"time":1582202301000,"category":"Transporation","_id":"91zUxLJyaZegszEy"}
-{"time":1582202361000,"category":"Sport","_id":"UbhqGhPkv24qs5ky"}
-{"time":1582202267000,"category":"Divertisment","_id":"dLljoaJTkvqWuPFD"}
-{"time":1582202888000,"category":" ","_id":"oJ4Er4JiWHPs6LkE"}
-{"time":1582197958000,"category":"In Class","_id":"uuHhvA50M2CyRPXo"}
-{"time":1582325583000,"category":"Exam","_id":"5Prkr5rNfPvzWwtk"}
-{"time":1582325766000,"category":"Tourism","_id":"QTi4vw2aJhqbojN4"}
-{"time":1582325782000,"category":"Walk","_id":"GWHvI5ZyK9B5fJ3y"}
+{"time":1582393899000,"category":{"name":"Sport","color":"#00ff00"},"_id":"5fppywRuMJaGLycu"}
+{"time":1582393977000,"category":{"name":"Exam","color":"#ff0000"},"_id":"urqZuiPVDRHK7cTf"}
+{"time":1582394005000,"category":{"name":"Sleep","color":"#004080"},"_id":"MmxblP73DsBZN62A"}
+{"time":1582394030000,"category":{"name":"Transportation","color":"#ffff00"},"_id":"77hoy8w22VZwWlHg"}
+{"time":1582394737000,"category":{"name":"Divertissement","color":"#ff8000"},"_id":"wqEjd4LTsF0vGGc6"}
+{"time":1582395133000,"category":{"name":"Work","color":"#ff0080"},"_id":"RbrXDGpD80yli6HB"}
+{"time":1582395249000,"category":{"name":"Tourism","color":"#008000"},"_id":"22y1zpNubRrIsPuw"}
+{"time":1582395943000,"category":{"name":"In Class","color":"#910048"},"_id":"zZuEYn9e5nkMHuns"}

@@ -141,13 +141,14 @@ app.post('/ListOfCategories', (request, response) => {
 app.post('/addCategorie', (request, response) => {
     
     console.log("Receved a request to add en Evenement")
-    console.log(request.body.in);
-
-    const receved = request.body.in;
-
     
 
-    categories.insert({time: Date.parse(new Date(Date.now())), category: receved})
+    const category = {name: request.body.category, color:  request.body.color};
+    
+    console.log(category);
+    
+
+    categories.insert({time: Date.parse(new Date(Date.now())), category});
 
     response.json({
         status: 'Sucessfuly receved',
