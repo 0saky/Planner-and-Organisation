@@ -14,6 +14,9 @@ const CategoriesStore = require('nedb');
 let categories = new CategoriesStore('Categories.db');
 categories.loadDatabase();
 
+const TasksStore = require('nedb');
+let tasks = new TasksStore('Tasks.db');
+tasks.loadDatabase();
 
 /*
 let evenements = [
@@ -156,3 +159,43 @@ app.post('/addCategorie', (request, response) => {
 
     console.log('Response send');
 });
+
+app.post('/addTask', (request, response) => {
+    
+    console.log("Receved a request to add a Task")
+    
+
+    const task = request.body;
+    
+    console.log(task);
+    
+
+    tasks.insert({task});
+
+    response.json({
+        status: 'Sucessfuly receved',
+    });
+
+    console.log('Response send');
+});
+
+app.post('/ListOfTasks', (request, response) => {
+    
+    console.log("Receved a request for list of categories: ")
+    let to_send = [];
+
+    let data = tasks.getAllData();
+
+    for (let i = 0; i < data.length; i++) {
+
+        to_send.push(data[i].task);
+        
+    }
+    response.json({
+        status: 'Sucessfuly receved this :',
+        data: to_send
+    });
+
+    console.log('Response send : ', to_send);
+});
+
