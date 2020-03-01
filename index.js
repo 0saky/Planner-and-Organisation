@@ -1,10 +1,8 @@
+
 //Run the server
 const express = require('express');
 const app = express();
 app.listen(3000, () => console.log('Listening at port 3000'));
-<<<<<<< Updated upstream
-app.use(express.static('public'));
-=======
 app.use(express.static('public'));
 app.use(express.json())
 
@@ -19,7 +17,6 @@ categories.loadDatabase();
 const TasksStore = require('nedb');
 let tasks = new TasksStore('Tasks.db');
 tasks.loadDatabase();
-
 
 /*
 let evenements = [
@@ -201,4 +198,4 @@ app.post('/ListOfTasks', (request, response) => {
 
     console.log('Response send : ', to_send);
 });
->>>>>>> Stashed changes
+
