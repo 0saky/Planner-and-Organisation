@@ -1,4 +1,5 @@
 let tasks;
+let categories;
 const Priority = ["High Priority", "Medium Priority", "Low Priority", "Done"];
 
 let Create_MainSketch = p => {
@@ -11,6 +12,7 @@ let Create_MainSketch = p => {
 
         getTasks();
 
+        requestCategories();
 
     }
 
@@ -31,7 +33,7 @@ let Create_ScrollSketch = p => {
         }
         console.log("Creating", y);
         
-        p.canvas = p.createCanvas(mainSketch.width/3 - 30, 1000);
+        p.canvas = p.createCanvas(mainSketch.width/3 - 30, mainSketch.height-55);
         
         let div = document.createElement("div");
         document.body.append(div);
@@ -47,7 +49,9 @@ let Create_ScrollSketch = p => {
 
         p.background(31, 128, 52, 50);
 
-        drawTasks(p.priority);
+        if(p.tasksprio){
+            drawTasks(p);
+        }
 
     }
 }

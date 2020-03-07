@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 app.listen(3000, () => console.log('Listening at port 3000'));
 app.use(express.static('public'));
-app.use(express.json())
+app.use(express.json());
 
 const Datastore = require('nedb');
 let database = new Datastore('database.db');
@@ -182,9 +182,10 @@ app.post('/addTask', (request, response) => {
 app.post('/ListOfTasks', (request, response) => {
     
     console.log("Receved a request for list of categories: ")
+
     let to_send = [];
 
-    let data = tasks.getAllData();
+    let data = tasks.getAllData();    
 
     for (let i = 0; i < data.length; i++) {
 
@@ -192,10 +193,9 @@ app.post('/ListOfTasks', (request, response) => {
         
     }
     response.json({
-        status: 'Sucessfuly receved this :',
         data: to_send
     });
-
+    
     console.log('Response send : ', to_send);
 });
 

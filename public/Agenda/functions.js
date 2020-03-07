@@ -188,7 +188,7 @@ function draw_past() {
 }
 
 
-    function getColor(init){
+function getColor(init){
     
     for(let category of categories){
         if(category.name == init){

@@ -24,7 +24,8 @@ function fxnSave(){
     let Task = {
         title: input_title.value(),
         priority: null,
-        categories: [],
+        categories: selecter_category.value(),
+        notes: input_notes.value(),
         CreationTime: new Date(Date.now()),
     }
 
@@ -34,11 +35,7 @@ function fxnSave(){
         }
     }
 
-    for(let i of checkbokes){
-        if(i.checked){
-            Task.categories.push(i.value);
-        }
-    }
+    
     console.log(Task);
 
     fxnSend(Task);
@@ -68,25 +65,18 @@ function notes_input(){
     console.log("The notes are: ", this.value());
 }
 
-function Create_Checkboxes(){
+function create_selecter() {
+    selecter_category = createSelect();
+    selecter_category.position(110, 195);
+    update_selecter();
+}
 
-    for (let i = 0; i < categories.length; i++){
-        
-        let checkbox = document.createElement("input");
-        document.body.append(checkbox);
-        checkbox.style = "position: absolute; left: "+ 80 + "px; top: " + (i*20+130) + "px";
-        checkbox.type = "checkbox";
-        checkbox.id = "Checkbox_" + categories[i].name;
-        checkbox.name = "Category";
-        checkbox.value = categories[i].name;
-        checkbokes.push(checkbox);
+async function update_selecter() {
 
-        fill(0);
-        textSize(15);
-        text(categories[i].name, 100, i*20+135);
-        
+    for (let category of categories) {
+        selecter_category.option(category.name);
     }
-
+    selecter_category.changed(fnxcategory);
 }
 
 function create_radios() {
@@ -144,7 +134,7 @@ async function requestCategories(){
 
        categories = received_data;
 
-       Create_Checkboxes();
+       create_selecter();
       
 }
 
