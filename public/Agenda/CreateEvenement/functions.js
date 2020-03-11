@@ -88,7 +88,7 @@ function draw_text() {
     options = { weekday: "long", year: "numeric", month: "long", day: "numeric" }
     let write = new Intl.DateTimeFormat(lang, options).format(dayStart);
     text(write, 100, 75);
-     write = new Intl.DateTimeFormat(lang, options).format(dayEnd);
+    write = new Intl.DateTimeFormat(lang, options).format(dayEnd);
     text(write, 465, 75);
 
     text("Starting Time : " + floor(slider_start.value() / 60) + ':' + slider_start.value() % 60, 0, 115);
@@ -157,8 +157,7 @@ function category_input() {
     addCategoty(this.value());
 }
 
-function fxnSave() 
-{
+function fxnSave() {
 
     refreshEvenement();
 
@@ -166,7 +165,7 @@ function fxnSave()
 
 
 
-    if(Modifying){
+    if (Modifying) {
         SaveModifiedEvenement(to_send);
     } else {
         SaveEvenement(to_send);
@@ -176,7 +175,7 @@ function fxnSave()
 
 async function SaveEvenement(data) {
 
-    console.log('Sending : ' , data);
+    console.log('Sending : ', data);
     const sendoptions = {
         method: 'POST',
         headers: {
@@ -189,14 +188,14 @@ async function SaveEvenement(data) {
 
     console.log(json);
 
-    if(json.status == 'Sucessfuly receved'){
+    if (json.status == 'Sucessfuly receved') {
         window.location.href = '..';
     }
 
 }
 async function SaveModifiedEvenement(data) {
 
-    console.log('Sending : ' , data);
+    console.log('Sending : ', data);
     const sendoptions = {
         method: 'POST',
         headers: {
@@ -209,7 +208,7 @@ async function SaveModifiedEvenement(data) {
 
     console.log(json);
 
-    if(json.status == 'Sucessfuly receved'){
+    if (json.status == 'Sucessfuly receved') {
         window.location.href = '..';
     }
 
@@ -217,17 +216,17 @@ async function SaveModifiedEvenement(data) {
 
 }
 
-function checkForModification(){
+function checkForModification() {
     myStorage = window.localStorage;
     console.log(myStorage);
-    if(myStorage.length > 0){
+    if (myStorage.length > 0) {
 
         console.log('Modifiyng an evenement');
 
         Modifying = true;
 
         const toModify = localStorage.getItem('ToModify');
-        
+
         evenement = JSON.parse(toModify);
         console.log("Evenement : ", evenement);
 
@@ -239,10 +238,10 @@ function checkForModification(){
 
     }
 
-    
+
 }
 
-function refreshEvenement(){
+function refreshEvenement() {
 
     starting = new Date(dayStart);
     starting.setHours(floor(slider_start.value() / 60));
@@ -251,24 +250,24 @@ function refreshEvenement(){
     ending = new Date(dayEnd);
     ending.setHours(floor(slider_end.value() / 60));
     ending.setMinutes(slider_end.value() % 60);
-    
-        evenement.title = input_title.value(),
+
+    evenement.title = input_title.value(),
         evenement.starting = starting,
         evenement.ending = ending,
         evenement.category = selecter_category.value(),
         evenement.notes = input_notes.value()
-        //console.log("Normal Evenement : ", evenement)
+    //console.log("Normal Evenement : ", evenement)
 }
 
-function setButtonValues(){
+function setButtonValues() {
     input_title.value(evenement.title);
     input_notes.value(evenement.notes);
 
     dayStart = new Date(evenement.starting);
     dayEnd = new Date(evenement.ending);
 
-    const s = dayStart.getHours()*60 + dayStart.getMinutes();
-    const e = dayEnd.getHours()*60 + dayEnd.getMinutes()
+    const s = dayStart.getHours() * 60 + dayStart.getMinutes();
+    const e = dayEnd.getHours() * 60 + dayEnd.getMinutes()
 
     slider_start.value(s);
     slider_end.value(e);
@@ -276,30 +275,30 @@ function setButtonValues(){
     selecter_category.value(evenement.category);
 }
 
-async function requestCategories(){
+async function requestCategories() {
 
     console.log('Sending');
 
-    
-        const data = {};
-        const sendoptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-                },
-            body: JSON.stringify(data)
-        }
-       const response = await fetch('/ListOfCategories', sendoptions);
-       const json = await response.json();
 
-       const received_data = json.data;
+    const data = {};
+    const sendoptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    const response = await fetch('/ListOfCategories', sendoptions);
+    const json = await response.json();
 
-       
-       console.log(received_data);
+    const received_data = json.data;
 
-       categories = received_data;
 
-       update_selecter();
+    console.log(received_data);
 
-       
+    categories = received_data;
+
+    update_selecter();
+
+
 }

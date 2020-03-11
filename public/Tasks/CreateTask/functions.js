@@ -1,4 +1,4 @@
-    function create_buttons(){
+function create_buttons() {
 
     button_home = createButton('Home');
     button_home.position(250, 20);
@@ -11,15 +11,15 @@
     button_save = createButton('Save');
     button_save.position(200, 450);
     button_save.mousePressed(fxnSave);
-    button_save.type="submit";
+    button_save.type = "submit";
 
 }
 
-function fxnSave(){    
+function fxnSave() {
 
     console.log("That a save!");
 
-    
+
 
     let Task = {
         title: input_title.value(),
@@ -29,20 +29,20 @@ function fxnSave(){
         CreationTime: new Date(Date.now()),
     }
 
-    for(let i of radios){
-        if(i.checked){
+    for (let i of radios) {
+        if (i.checked) {
             Task.priority = i.value;
         }
     }
 
-    
+
     console.log(Task);
 
     fxnSend(Task);
 
 }
 
-function create_inputs(){
+function create_inputs() {
 
     input_title = createInput('');
     input_title.position(70, 60);
@@ -57,11 +57,11 @@ function create_inputs(){
 
 }
 
-function title_input(){
+function title_input() {
     console.log("Title is: ", this.value());
 }
 
-function notes_input(){
+function notes_input() {
     console.log("The notes are: ", this.value());
 }
 
@@ -81,11 +81,11 @@ async function update_selecter() {
 
 function create_radios() {
 
-    for (let i = 0; i < Priority.length; i++){
-        
+    for (let i = 0; i < Priority.length; i++) {
+
         let radio = document.createElement("input");
         document.body.append(radio);
-        radio.style = "position: absolute; left: "+ (i*120+50) + "px; top: " + 350 + "px";
+        radio.style = "position: absolute; left: " + (i * 120 + 50) + "px; top: " + 350 + "px";
         radio.type = "radio";
         radio.id = "radio_" + Priority[i];
         radio.name = "Priority";
@@ -94,14 +94,14 @@ function create_radios() {
 
         fill(0);
         textSize(15);
-        text(Priority[i], (i*120+62), 356);
-        
+        text(Priority[i], (i * 120 + 62), 356);
+
     }
 
 
 }
 
-function draw_text(){
+function draw_text() {
 
     textSize(30);
     noStroke();
@@ -111,50 +111,50 @@ function draw_text(){
 
 }
 
-async function requestCategories(){
+async function requestCategories() {
 
     console.log('Sending');
 
-    
-        const data = {};
-        const sendoptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-                },
-            body: JSON.stringify(data)
-        }
-       const response = await fetch('/ListOfCategories', sendoptions);
-       const json = await response.json();
 
-       const received_data = json.data;
+    const data = {};
+    const sendoptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    const response = await fetch('/ListOfCategories', sendoptions);
+    const json = await response.json();
 
-       
-       console.log(received_data);
+    const received_data = json.data;
 
-       categories = received_data;
 
-       create_selecter();
-      
+    console.log(received_data);
+
+    categories = received_data;
+
+    create_selecter();
+
 }
 
-async function fxnSend(Task){
+async function fxnSend(Task) {
     console.log("Sending");
 
     const sendoptions = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
-            },
+        },
         body: JSON.stringify(Task)
     }
-   const response = await fetch('/addTask', sendoptions);
-   const json = await response.json();
+    const response = await fetch('/addTask', sendoptions);
+    const json = await response.json();
 
-   console.log(json);
+    console.log(json);
 
-   if(json.status = "Sucessfuly receved"){
-       window.location.href = '..';
-   }
+    if (json.status = "Sucessfuly receved") {
+        window.location.href = '..';
+    }
 
 }

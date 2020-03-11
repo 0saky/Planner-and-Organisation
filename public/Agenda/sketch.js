@@ -15,17 +15,20 @@ let sync = false;
 
 
 function setup() {
+
+    localStorage.clear();
+
     //Creating Canvas
     canvas = createCanvas(windowWidth - 20, windowHeight - 20);
     // background(220);
-    
+
     //Get current date
     date = new Date(Date.now());
 
     create_buttons();
 
     requestCategories();
-    
+
 }
 
 function draw() {
@@ -40,6 +43,10 @@ function draw() {
     for (let i = 0; i < numberofdays; i++) {
 
         const vardate = new Date(Date.parse(date) + (i - floor(numberofdays / 2)) * increment);
+
+        vardate.setHours(0);
+        vardate.setMinutes(0);
+
         days_array.push(vardate);
         let day = [];
         //Store it in diffrent variables
@@ -118,7 +125,7 @@ function draw() {
     }
     pop();
 
-    
+
 
     conty = 0;
     contm = 0;
@@ -129,22 +136,22 @@ function draw() {
 
     draw_rowlines();
 
-    
+
 
     draw_now();
 
-    
+
 
     draw_text();
 
     mouse_overEvenementInfo();
 
-    
-    if(!sync){
+
+    if (!sync) {
         SyncData();
         sync = true;
     }
-    
+
 }
 
 

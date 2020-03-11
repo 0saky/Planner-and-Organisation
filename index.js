@@ -53,10 +53,11 @@ app.post('/receveEvenements', (request, response) => {
 
 
 
-    const start = receved.start_date;
-    const end = receved.end_date;
+    let start = new Date(receved.start_date);
+    start.setDate(start.getDate()-1);
+    const end = new Date(receved.end_date);
 
-    console.log("Receved a request : start = ", new Date(start), " end = ", new Date(end));
+    console.log("Receved a request : start = ", start, " end = ", end);
 
     let to_send = [];
 
@@ -64,8 +65,9 @@ app.post('/receveEvenements', (request, response) => {
 
     for (let i = 0; i < data.length; i++) {
 
-        const time_start = Date.parse(new Date(data[i].evenement.starting));
-        const time_end = Date.parse(new Date(data[i].evenement.ending));
+        const time_start = new Date(data[i].evenement.starting);
+        
+        const time_end = new Date(data[i].evenement.ending);
 
         if (time_end > start && time_start < end) {
             data[i].evenement.id = data[i]._id;
@@ -77,7 +79,7 @@ app.post('/receveEvenements', (request, response) => {
         data: to_send
     });
 
-    console.log('Response send : ', to_send);
+    //console.log('Response send : ', to_send);
 });
 
 app.post('/addEvenements', (request, response) => {
@@ -127,7 +129,7 @@ app.post('/ListOfCategories', (request, response) => {
 
     for (let i = 0; i < data.length; i++) {
 
-        
+        data[i].category.id = data[i]._id;
         to_send.push(data[i].category);
         
     }
@@ -199,3 +201,23 @@ app.post('/ListOfTasks', (request, response) => {
     console.log('Response send : ', to_send);
 });
 
+app.post('/ModifiedCategory', (request, response) => {
+    const receved = request.body;
+
+    console.log("Modifying a Category: ", receved);
+
+    const time = Date.parse(new Date(Date.now()))
+
+    const category = {
+        name: receved.name,
+        color: receved.color
+    }
+
+    categories.update({ _id: receved.id}, {time: time, category: category}, {});
+
+    response.json({
+        status: 'Sucessfuly receved',
+    });
+
+    console.log('Response send');
+});

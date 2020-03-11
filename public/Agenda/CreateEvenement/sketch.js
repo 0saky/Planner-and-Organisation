@@ -1,7 +1,7 @@
 const lang = /*"fr-FR";*/   "en-US";
 let categories = {};
 let options;
-const today = new Date( Date.now() );
+const today = new Date(Date.now());
 let dayStart = today;
 let dayEnd = today;
 let Modifying = false;
@@ -31,7 +31,7 @@ function setup() {
 
 }
 
-function draw(){
+function draw() {
 
     background(255);
 

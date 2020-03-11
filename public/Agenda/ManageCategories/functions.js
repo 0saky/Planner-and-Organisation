@@ -1,6 +1,4 @@
 
-
-
 function create_buttons() {
 
     button_home = createButton('Home');
@@ -12,52 +10,32 @@ function create_buttons() {
     button_Agenda.attribute('onclick', "window.location.href = '..';");
 }
 
-async function requestCategories(){
+async function requestCategories() {
 
     console.log('Sending');
 
-    
-        const data = {};
-        const sendoptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-                },
-            body: JSON.stringify(data)
-        }
-       const response = await fetch('/ListOfCategories', sendoptions);
-       const json = await response.json();
 
-       const received_data = json.data;
+    const data = {};
+    const sendoptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    const response = await fetch('/ListOfCategories', sendoptions);
+    const json = await response.json();
 
-       
-       console.log(received_data);
+    const received_data = json.data;
 
-       categories = received_data;
 
-       create_visualisation();
-      
+    console.log(received_data);
+
+    categories = received_data;
+
+    create_visualisation();
+
 }
-
-// function getColor(category){
-    
-//     if(category == "Sleep"){
-//         return color(0, 0, 255);
-//     } else if (category == "Sport"){
-//         return color(0, 255, 0);
-//     } else if (category == "In Class"){
-//         return color(255, 0, 255);
-//     } else if (category == "Divertisment"){
-//         return color(0, 255, 255);
-//     } else if (category == "Work"){
-//         return color(255, 255, 0);
-//     } else if (category == "Transporation"){
-//         return color(127, 0, 127);
-//     } else if (category == "Exam"){
-//         return color(255, 0, 0);
-//     }
-//     return color(0);
-// }
 
 function create_visualisation() {
 
@@ -65,11 +43,11 @@ function create_visualisation() {
 
     let i = 0;
 
-    for(category of categories){
+    for (category of categories) {
 
-        console.log("making: " + category.name);
+        // console.log("making: " + category.name);
 
-        const y = (i+1)*(height/(nombreCat+2));
+        const y = (i + 1) * (height / (nombreCat + 2));
 
         const color = category.color;
 
@@ -81,12 +59,12 @@ function create_visualisation() {
         fill(color);
         ellipse(0, y, 80);
 
-        positions[category.name] = [0, y-40, 500, y+40];
+        positions[category.name] = [0, y - 40, 500, y + 40];
 
         i++;
     }
 
-    const y = (nombreCat+1)*(height/(nombreCat+2));
+    const y = (nombreCat + 1) * (height / (nombreCat + 2));
 
     fill(0);
 
@@ -97,44 +75,48 @@ function create_visualisation() {
 
     stroke(150);
     line(0, y, 40, y);
-    line(20, y-20, 20, y+20);
+    line(20, y - 20, 20, y + 20);
 
-    positions["addCategory"] = [80, y-30, 300, y];
-    positions["addSub-category"] = [350, y-30, 500, y];
-    
+    positions["addCategory"] = [80, y - 30, 300, y];
+    positions["addSub-category"] = [350, y - 30, 500, y];
+
 
 }
 
 
 function mouseReleased() {
-    for (const object in positions){
+    let i = 0;
+    for (const object in positions) {
         const x = mouseX;
         const y = mouseY;
 
         const position = positions[object];
 
-        if(x > position[0] && y > position[1] && x < position[2] && y < position[3]){
+        if (x > position[0] && y > position[1] && x < position[2] && y < position[3]) {
 
             background(255);
             create_visualisation();
 
-            if(object == "addCategory"){
+            if (object == "addCategory") {
+                create_Addcategory();
+
+            } else {
+                modify = true;
+                categoryModif = categories[i];
                 create_Addcategory();
                 
-            } else {
-            stroke(0);
-            textSize(50);
-            text(object, 550, height/2);
+
             }
 
 
 
         }
+        i++;
     }
 }
 
-function create_Addcategory(){
-    
+function create_Addcategory() {
+
     noStroke();
     textSize(35);
     text("Category title: ", 500, 50);
@@ -150,30 +132,40 @@ function create_Addcategory(){
     colorpicker = createColorPicker('#ff0000');
     colorpicker.position(600, 150);
     colorpicker.input(givecolor);
-    
-   button_save = createButton('Save');
-   button_save.position(600, 300);
-   button_save.mousePressed(fxnSave);
+
+    button_save = createButton('Save');
+    button_save.position(600, 300);
+    button_save.mousePressed(fxnSave);
+
+    if (modify) {
+        let category = categoryModif;
+        console.log(category);
+        input_title.value(category.name);
+        colorpicker.value(category.color);
+    }
 
 }
 
-function title_input(){
+function title_input() {
     console.log('Title is: ', this.value());
 }
 
-function givecolor(){
+function givecolor() {
     console.log("Color is: " + this.value());
 }
 
-function fxnSave(){
-
-addCategory(input_title.value(), colorpicker.value());
+function fxnSave() {
+    if (modify) {
+        savemodif();
+    } else {
+        addCategory(input_title.value(), colorpicker.value());
+    }
 
 }
 
 async function addCategory(name, color) {
 
-    const ToSend = {category: name, color: color};
+    const ToSend = { category: name, color: color };
     console.log('Sending : ', ToSend);
     const sendoptions = {
         method: 'POST',
@@ -187,9 +179,32 @@ async function addCategory(name, color) {
 
     console.log(json);
 
-    if(json.status == 'Sucessfuly receved'){
+    if (json.status == 'Sucessfuly receved') {
         window.location.href = '..';
     }
 
+
+}
+
+async function savemodif() {
+    categoryModif.name = input_title.value();
+    categoryModif.color = colorpicker.value();
+    console.log("Saving this: ", categoryModif);
+
+    const sendoptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(categoryModif)
+    }
+    const response = await fetch('/ModifiedCategory', sendoptions);
+    const json = await response.json();
+
+    console.log(json);
+
+    if (json.status == 'Sucessfuly receved') {
+        window.location.href = '..';
+    }
 
 }

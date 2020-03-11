@@ -1,7 +1,9 @@
-let categories = {};
+let categories;
 let positions = {};
+let modify = false;
+let categoryModif;
 
-function setup(){
+function setup() {
 
     canvas = createCanvas(windowWidth - 20, windowHeight - 20);
 
