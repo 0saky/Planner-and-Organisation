@@ -2,6 +2,9 @@ let categories = {};
 let checkbokes = [];
 const Priority = ["High Priority", "Medium Priority", "Low Priority", "Done"];
 let radios = [];
+let Modifying = false;
+let idTask;
+
 
 function setup() {
 
@@ -14,6 +17,8 @@ function setup() {
     requestCategories();
 
     create_radios()
+
+    checkForModification();
 }
 
 function draw() {

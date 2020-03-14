@@ -54,7 +54,7 @@ app.post('/receveEvenements', (request, response) => {
 
 
     let start = new Date(receved.start_date);
-    start.setDate(start.getDate()-1);
+    start.setDate(start.getDate() - 1);
     const end = new Date(receved.end_date);
 
     console.log("Receved a request : start = ", start, " end = ", end);
@@ -66,7 +66,7 @@ app.post('/receveEvenements', (request, response) => {
     for (let i = 0; i < data.length; i++) {
 
         const time_start = new Date(data[i].evenement.starting);
-        
+
         const time_end = new Date(data[i].evenement.ending);
 
         if (time_end > start && time_start < end) {
@@ -87,7 +87,7 @@ app.post('/addEvenements', (request, response) => {
 
     console.log(receved);
 
-    database.insert({time: Date.parse(new Date(Date.now())), evenement: receved})
+    database.insert({ time: Date.parse(new Date(Date.now())), evenement: receved })
 
     response.json({
         status: 'Sucessfuly receved',
@@ -111,7 +111,7 @@ app.post('/ModifiedEvenement', (request, response) => {
         notes: receved.notes
     }
 
-    database.update({ _id: receved.id }, {time: time, evenement: evenement}, {});
+    database.update({ _id: receved.id }, { time: time, evenement: evenement }, {});
 
     response.json({
         status: 'Sucessfuly receved',
@@ -121,7 +121,7 @@ app.post('/ModifiedEvenement', (request, response) => {
 });
 
 app.post('/ListOfCategories', (request, response) => {
-    
+
     console.log("Receved a request for list of categories: ")
     let to_send = [];
 
@@ -131,7 +131,7 @@ app.post('/ListOfCategories', (request, response) => {
 
         data[i].category.id = data[i]._id;
         to_send.push(data[i].category);
-        
+
     }
     response.json({
         status: 'Sucessfuly receved this :',
@@ -144,16 +144,16 @@ app.post('/ListOfCategories', (request, response) => {
 
 
 app.post('/addCategorie', (request, response) => {
-    
+
     console.log("Receved a request to add en Evenement")
-    
 
-    const category = {name: request.body.category, color:  request.body.color};
-    
+
+    const category = { name: request.body.category, color: request.body.color };
+
     console.log(category);
-    
 
-    categories.insert({time: Date.parse(new Date(Date.now())), category});
+
+    categories.insert({ time: Date.parse(new Date(Date.now())), category });
 
     response.json({
         status: 'Sucessfuly receved',
@@ -163,16 +163,16 @@ app.post('/addCategorie', (request, response) => {
 });
 
 app.post('/addTask', (request, response) => {
-    
+
     console.log("Receved a request to add a Task")
-    
+
 
     const task = request.body;
-    
-    console.log(task);
-    
 
-    tasks.insert({task});
+    console.log(task);
+
+
+    tasks.insert({ task });
 
     response.json({
         status: 'Sucessfuly receved',
@@ -182,23 +182,24 @@ app.post('/addTask', (request, response) => {
 });
 
 app.post('/ListOfTasks', (request, response) => {
-    
+
     console.log("Receved a request for list of categories: ")
 
     let to_send = [];
 
-    let data = tasks.getAllData();    
+    let data = tasks.getAllData();
 
     for (let i = 0; i < data.length; i++) {
 
+        data[i].task.id = data[i]._id;
         to_send.push(data[i].task);
-        
+
     }
     response.json({
         data: to_send
     });
-    
-    console.log('Response send : ', to_send);
+
+    //console.log('Response send : ', to_send);
 });
 
 app.post('/ModifiedCategory', (request, response) => {
@@ -213,7 +214,7 @@ app.post('/ModifiedCategory', (request, response) => {
         color: receved.color
     }
 
-    categories.update({ _id: receved.id}, {time: time, category: category}, {});
+    categories.update({ _id: receved.id }, { time: time, category: category }, {});
 
     response.json({
         status: 'Sucessfuly receved',
@@ -221,3 +222,56 @@ app.post('/ModifiedCategory', (request, response) => {
 
     console.log('Response send');
 });
+
+app.post('/idTaskdetails', (request, response) => {
+    const receved = request.body.id;
+
+    console.log("Getting Details idTask: ", receved);
+
+    let task;
+
+    tasks.find({ _id: receved }, function (err, docs) {
+        if (err) return reject(err);
+        if (docs) {
+          
+            task = docs[0].task;
+            task.id = docs[0]._id;
+
+            response.json({
+                status: 'Sucessfuly receved',
+                task: task
+            });
+
+            console.log('Response send', task);
+        }
+
+
+    });
+
+
+})
+
+app.post('/ModifyTask', (request, response) => {
+    const receved = request.body;
+
+    console.log("Modif Task: ", receved);
+
+    const task = {
+        title: receved.title,
+        priority: receved.priority,
+        category: receved.category,
+        notes: receved.notes,
+        CreationTime: receved.CreationTime
+    }
+
+    tasks.update({ _id: receved.id }, {task: task}, {});
+
+    response.json({
+        status: 'Sucessfuly receved',
+    });
+
+    console.log('Response send');
+});
+
+
+

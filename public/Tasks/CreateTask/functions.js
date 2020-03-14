@@ -19,12 +19,10 @@ function fxnSave() {
 
     console.log("That a save!");
 
-
-
     let Task = {
         title: input_title.value(),
         priority: null,
-        categories: selecter_category.value(),
+        category: selecter_category.value(),
         notes: input_notes.value(),
         CreationTime: new Date(Date.now()),
     }
@@ -38,7 +36,12 @@ function fxnSave() {
 
     console.log(Task);
 
-    fxnSend(Task);
+    if(Modifying){
+        fxnSendModif(Task);
+    }else {
+        fxnSend(Task);
+    }
+    
 
 }
 
@@ -69,6 +72,9 @@ function create_selecter() {
     selecter_category = createSelect();
     selecter_category.position(110, 195);
     update_selecter();
+}
+function fnxcategory(){
+    console.log("Category: ", this.value());
 }
 
 async function update_selecter() {
@@ -157,4 +163,82 @@ async function fxnSend(Task) {
         window.location.href = '..';
     }
 
+}
+
+async function checkForModification() {
+    myStorage = window.localStorage;
+    //console.log(myStorage);
+    if (myStorage.length > 0) {
+
+        console.log('Modifiyng an evenement');
+
+        Modifying = true;
+
+        const toModify = localStorage.getItem('ToModify');
+
+        idTask = JSON.parse(toModify);
+        console.log("Task : ", idTask);
+
+        const task = await requestTask(idTask);
+        setButtonValues(task);
+
+    } else {
+
+        console.log('Creating an evenement');
+
+    }
+
+
+}
+
+async function requestTask(idTask){
+
+    console.log("Getting details");
+    const data = {id: idTask}
+    const sendoptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
+    const response = await fetch('/idTaskdetails', sendoptions);
+    const json = await response.json();
+
+    console.log(json);
+
+    return json.task;
+    
+}
+
+function setButtonValues(task){
+    console.log(task);
+    input_title.value(task.title);
+    input_notes.value(task.notes);
+    selecter_category.value(task.category);
+    
+}
+
+async function fxnSendModif(Task){
+
+    console.log("Sending");
+
+    Task.id = idTask;
+
+    const sendoptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(Task)
+    }
+    const response = await fetch('/ModifyTask', sendoptions);
+    const json = await response.json();
+
+    console.log(json);
+
+    if (json.status = "Sucessfuly receved") {
+        localStorage.clear();
+        window.location.href = '..';
+    }
 }
