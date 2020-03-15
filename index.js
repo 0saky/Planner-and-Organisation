@@ -93,7 +93,7 @@ app.post('/addEvenements', (request, response) => {
         status: 'Sucessfuly receved',
     });
 
-    console.log('Response send');
+  //  console.log('Response send');
 });
 
 app.post('/ModifiedEvenement', (request, response) => {
@@ -117,7 +117,7 @@ app.post('/ModifiedEvenement', (request, response) => {
         status: 'Sucessfuly receved',
     });
 
-    console.log('Response send');
+   // console.log('Response send');
 });
 
 app.post('/ListOfCategories', (request, response) => {
@@ -138,7 +138,7 @@ app.post('/ListOfCategories', (request, response) => {
         data: to_send
     });
 
-    console.log('Response send : ', to_send);
+  //  console.log('Response list of categories send: ', to_send);
 });
 
 
@@ -148,9 +148,9 @@ app.post('/addCategorie', (request, response) => {
     console.log("Receved a request to add en Evenement")
 
 
-    const category = { name: request.body.category, color: request.body.color };
+    const category = request.body;
 
-    console.log(category);
+   // console.log(category);
 
 
     categories.insert({ time: Date.parse(new Date(Date.now())), category });
@@ -159,7 +159,7 @@ app.post('/addCategorie', (request, response) => {
         status: 'Sucessfuly receved',
     });
 
-    console.log('Response send');
+  //  console.log('Response send');
 });
 
 app.post('/addTask', (request, response) => {
@@ -169,7 +169,7 @@ app.post('/addTask', (request, response) => {
 
     const task = request.body;
 
-    console.log(task);
+  //  console.log(task);
 
 
     tasks.insert({ task });
@@ -178,7 +178,7 @@ app.post('/addTask', (request, response) => {
         status: 'Sucessfuly receved',
     });
 
-    console.log('Response send');
+   // console.log('Response send');
 });
 
 app.post('/ListOfTasks', (request, response) => {
@@ -203,24 +203,21 @@ app.post('/ListOfTasks', (request, response) => {
 });
 
 app.post('/ModifiedCategory', (request, response) => {
-    const receved = request.body;
+    const receved = request.body.cat;
 
     console.log("Modifying a Category: ", receved);
 
     const time = Date.parse(new Date(Date.now()))
 
-    const category = {
-        name: receved.name,
-        color: receved.color
-    }
+    const category = receved;
 
-    categories.update({ _id: receved.id }, { time: time, category: category }, {});
+    categories.update({ _id: request.body.id }, { time: time, category: category }, {});
 
     response.json({
         status: 'Sucessfuly receved',
     });
 
-    console.log('Response send');
+   // console.log('Response send');
 });
 
 app.post('/idTaskdetails', (request, response) => {
@@ -270,7 +267,7 @@ app.post('/ModifyTask', (request, response) => {
         status: 'Sucessfuly receved',
     });
 
-    console.log('Response send');
+    // console.log('Response send');
 });
 
 

@@ -1,3 +1,4 @@
+{"time":1584292886000,"evenement":{"title":"On you","starting":"2020-03-15T13:45:59.608Z","ending":"2020-03-15T15:15:59.608Z","category":"Work","sub_categories":["On computer projects"],"notes":""},"_id":"0RG0E1OQcwMLrwnT"}
 {"time":1583194136000,"evenement":{"title":"","starting":"2020-03-02T00:00:58.000Z","ending":"2020-03-02T07:30:58.000Z","category":"Sleep","notes":""},"_id":"19LVVVTLvX96mhvR"}
 {"time":1580330030000,"evenement":{"title":"Bike and RER","starting":"2020-01-29T08:00:09.573Z","ending":"2020-01-29T09:15:09.573Z","category":"Transporation","notes":""},"_id":"1Ca8W7P0GHx468yh"}
 {"time":1583659620000,"evenement":{"title":"On you","starting":"2020-03-07T16:30:30.000Z","ending":"2020-03-07T19:30:30.000Z","category":"Work","notes":""},"_id":"1FLSPiRA9oXdWAld"}
@@ -10,6 +11,7 @@
 {"time":1582395280000,"evenement":{"title":"Trackmania","starting":"2020-02-20T13:30:55.000Z","ending":"2020-02-20T14:30:55.000Z","category":"Divertissement","notes":""},"_id":"3SWgjttjyyvQCahm"}
 {"time":1582204505000,"evenement":{"title":"Went searching Computer at FNAC","starting":"2020-02-19T12:47:58.000Z","ending":"2020-02-19T13:51:58.000Z","category":"Sport","notes":"By bike to FNAC Montparnass 19:43 and 22:13 for 6 kms"},"_id":"3TED4Hq7kUQl5EmQ"}
 {"time":1583364852000,"evenement":{"title":"Récuperation des pièces d'identités","starting":"2020-03-04T14:27:40.000Z","ending":"2020-03-04T14:37:40.000Z","category":"Work","notes":""},"_id":"3b3jFWT66AhDyqbX"}
+{"time":1584226649000,"evenement":{"title":"Metro","starting":"2020-03-14T07:30:41.746Z","ending":"2020-03-14T08:30:41.746Z","category":"Transportation","notes":"From Home to Arkose Nation"},"_id":"4w5IKpfwsMAHyPVM"}
 {"time":1582202872000,"evenement":{"title":"Travailler sur projet","starting":"2020-02-20T10:41:35.000Z","ending":"2020-02-20T12:00:35.000Z","category":"Work","notes":""},"_id":"5BPW1kmJwdCp28az"}
 {"time":1582675181000,"evenement":{"title":"Meca 2, Analyse","starting":"2020-02-25T07:15:44.000Z","ending":"2020-02-25T11:15:44.000Z","category":"In Class","notes":""},"_id":"5MoJMxnUiyuWYYAs"}
 {"time":1582838912000,"evenement":{"title":"Algèbre Linéaire, TP Prog. Impé.","starting":"2020-02-27T07:15:17.474Z","ending":"2020-02-27T11:30:17.474Z","category":"In Class","notes":"Pokémon GO!"},"_id":"5SF1HnIQZRWXP69d"}
@@ -23,12 +25,13 @@
 {"time":1582579360000,"evenement":{"title":"","starting":"2020-02-24T18:20:56.636Z","ending":"2020-02-24T18:55:56.636Z","category":"Divertissement","notes":""},"_id":"7ihTbwCnaLpV6nqE"}
 {"time":1582754610000,"evenement":{"title":"Sleep","starting":"2020-02-26T14:15:00.487Z","ending":"2020-02-26T15:00:00.487Z","category":"Sleep","notes":""},"_id":"81vSUbqJ9YrPPs9H"}
 {"time":1583281747000,"evenement":{"title":"Prepa BNSSA","starting":"2020-03-03T17:00:11.000Z","ending":"2020-03-03T19:00:11.000Z","category":"Sport","notes":"bien senti, eau tres froide, pas de mal au genoux, apnées qui progresse lentement, de même pour les palmes. Reçu le bonet de l'université"},"_id":"8jywxJS73WNK5lhB"}
+{"time":1584226920000,"evenement":{"title":"","starting":"2020-03-14T13:45:41.000Z","ending":"2020-03-14T16:10:41.000Z","category":"Sleep","notes":""},"_id":"99C5YDx4eNmGB5u7"}
 {"time":1582395634000,"evenement":{"title":"Balade Avant d'aller se coucher","starting":"2020-02-20T21:00:36.000Z","ending":"2020-02-20T22:15:36.000Z","category":"Tourism","notes":"Visite de nuit des bors de la Loire"},"_id":"9TVH6KudbwfTZUvE"}
 {"time":1582984851000,"evenement":{"title":"Bike and RER","starting":"2020-02-28T10:30:22.000Z","ending":"2020-02-28T11:35:22.000Z","category":"Transportation","notes":""},"_id":"9c1F8Ggnz7y3hZtc"}
 {"time":1582579288000,"evenement":{"title":"Sleep","starting":"2020-02-23T23:30:05.769Z","ending":"2020-02-24T05:00:05.769Z","category":"Sleep","notes":""},"_id":"9hqMsbAB7fqn8Xly"}
 {"time":1582395678000,"evenement":{"title":"On you","starting":"2020-02-21T21:17:49.000Z","ending":"2020-02-22T00:50:49.000Z","category":"Work","notes":""},"_id":"9l9IluJB6MKGRDcL"}
 {"time":1583365450000,"evenement":{"title":"Youtube, Papa, Toi","starting":"2020-03-04T22:30:44.000Z","ending":"2020-03-04T23:40:44.099Z","category":"Divertissement","notes":"Youtube : Best of Freeride World Tour RedBull 2019, Marbel Machine X, Popcorn Valorant Zerator, Doming, Maghla, Ponse, Fastest Skier (chiant), Bodybuilder ft Gymnast, Coding Tree in Python (pas terrible), Landscape Photographie in a snow storm in scotland, PQ, Faite enter l'acussé, Routes de l'impossible Colombie, Pilotes fou, DC30 et agricole. ;Papa : je lui raconte ma journée, on évite le sujet de sa santé; Je remplit les infos"},"_id":"9mev5gCFEok8OO6z"}
-{"time":1584146687000,"evenement":{"title":"Meac 2 TD, Methodo","starting":"2020-03-12T13:00:18.000Z","ending":"2020-03-12T16:45:18.000Z","category":"In Class","notes":""},"_id":"A4R8fS80LjrXMHZM"}
+{"time":1584288453000,"evenement":{"title":"Meac 2 TD, Methodo","starting":"2020-03-12T13:00:18.000Z","ending":"2020-03-12T16:45:18.000Z","category":"School","notes":""},"_id":"A4R8fS80LjrXMHZM"}
 {"time":1583882009000,"evenement":{"title":"","starting":"2020-03-09T22:00:04.000Z","ending":"2020-03-10T00:30:04.000Z","category":"Divertissement","notes":""},"_id":"AktYEM3gyYjXHUj4"}
 {"time":1582395066000,"evenement":{"title":"Divertissement","starting":"2020-02-19T08:30:11.716Z","ending":"2020-02-19T11:06:11.716Z","category":"Divertissement","notes":""},"_id":"BEOcHUplHHbPn0rw"}
 {"time":1580387902000,"evenement":{"title":"TD Analyse","starting":"2020-01-31T09:30:29.357Z","ending":"2020-01-29T12:57:29.357Z","category":"In Class","notes":""},"_id":"BGJnkMzJJdeMJl8U"}
@@ -105,6 +108,7 @@
 {"time":1583364758000,"evenement":{"title":"Metro","starting":"2020-03-04T14:22:39.000Z","ending":"2020-03-04T14:27:39.000Z","category":"Transportation","notes":"Temps d'atente du bus longue. donc métro Alésia, Mairie de Montrouge."},"_id":"YjSG2Z5Not0phY3H"}
 {"time":1583711512000,"evenement":{"title":"Prepare for Partiel of Meca 2","starting":"2020-03-08T17:30:07.000Z","ending":"2020-03-08T18:40:07.000Z","category":"Work","notes":"Was much easier."},"_id":"YtIkapxdX8o5YC7U"}
 {"time":1579985698000,"evenement":{"title":"Dormir","starting":"2020-01-22T07:00:04.000Z","ending":"2020-01-22T09:00:04.000Z","category":"Sleep","notes":"GHGHgrheet"},"_id":"Yw0KzO3KYxZa8Bo1"}
+{"time":1584226599000,"evenement":{"title":"","starting":"2020-03-14T01:00:43.571Z","ending":"2020-03-14T07:00:43.571Z","category":"Sleep","notes":""},"_id":"Z3LiQPGvlxUiEduQ"}
 {"time":1583194493000,"evenement":{"title":"RER and Bike","starting":"2020-03-02T16:45:04.000Z","ending":"2020-03-02T18:05:04.000Z","category":"Transportation","notes":"Courir avec Yoan, Mateo, ..., pour le RER, ligne perturbé, changement très long a Bourg-la-Reine, mal au genoux (de croissance) qui part en chauffant sur le vélo"},"_id":"ZWPLMyejVvsv7l98"}
 {"time":1582395157000,"evenement":{"title":"Trajet Paris Nantes","starting":"2020-02-20T16:00:11.000Z","ending":"2020-02-20T21:00:11.000Z","category":"Transportation","notes":"By car Montrouge, Boulogne, Nantes 4h"},"_id":"ZnKQMhmq7pqKSvW7"}
 {"time":1583659297000,"evenement":{"title":"Bike and RER","starting":"2020-03-07T07:00:57.000Z","ending":"2020-03-07T08:15:57.000Z","category":"Transportation","notes":""},"_id":"aCHdp3E16VcK8bWa"}
@@ -120,6 +124,7 @@
 {"time":1583711568000,"evenement":{"title":"Prepare for meca 2 Partiel","starting":"2020-03-08T20:00:56.000Z","ending":"2020-03-08T21:00:56.000Z","category":"Work","notes":"Was not so easy"},"_id":"dP8LvuTvBhx5MvjE"}
 {"time":1582395705000,"evenement":{"title":"Sleep","starting":"2020-02-22T01:00:23.138Z","ending":"2020-02-22T09:00:23.138Z","category":"Sleep","notes":""},"_id":"dhKIxouQEByqERhX"}
 {"time":1582838949000,"evenement":{"title":"Adobe, ...","starting":"2020-02-27T20:40:37.713Z","ending":"2020-02-27T23:00:37.713Z","category":"Divertissement","notes":""},"_id":"eUaqhdiDLFxSJoHK"}
+{"time":1584226985000,"evenement":{"title":"On you","starting":"2020-03-14T21:00:39.000Z","ending":"2020-03-14T23:00:39.000Z","category":"Work","notes":""},"_id":"eZ2JngUKYh1zbjJ7"}
 {"time":1583563738000,"evenement":{"title":"Metro et Bike","starting":"2020-03-05T22:15:24.000Z","ending":"2020-03-05T22:45:24.000Z","category":"Transportation","notes":""},"_id":"emxIWbh01YyQ2pn6"}
 {"time":1582579230000,"evenement":{"title":"Home Gym","starting":"2020-02-23T22:30:40.000Z","ending":"2020-02-23T23:00:40.000Z","category":"Sport","notes":""},"_id":"fCwhAwuCGekehh9t"}
 {"time":1582585133000,"evenement":{"title":"","starting":"2020-02-24T21:20:03.354Z","ending":"2020-02-24T23:00:03.354Z","category":"Work","notes":""},"_id":"fE45K2iqIns8T0OI"}
@@ -130,6 +135,7 @@
 {"time":1584146728000,"evenement":{"title":"RER and Bike","starting":"2020-03-12T16:50:49.000Z","ending":"2020-03-12T18:00:49.000Z","category":"Transportation","notes":""},"_id":"i6vGRx8HSZhMkxLR"}
 {"time":1582838710000,"evenement":{"title":"Bike and RER","starting":"2020-02-27T06:00:23.765Z","ending":"2020-02-27T07:15:23.765Z","category":"Transportation","notes":"Horrible averse je suis arrivé complètement trempé au RER"},"_id":"iXUlHcoFR80bs5Yo"}
 {"time":1580387565000,"evenement":{"title":"Sleep","starting":"2020-01-28T23:00:09.573Z","ending":"2020-01-29T05:20:09.573Z","category":"Sleep","notes":""},"_id":"idNJqT7UIeEVl67t"}
+{"time":1584226891000,"evenement":{"title":"Metro","starting":"2020-03-14T11:50:53.000Z","ending":"2020-03-14T12:45:53.000Z","category":"Transportation","notes":""},"_id":"ioqtn79JPvm7TwIX"}
 {"time":1582754397000,"evenement":{"title":"Divertissment","starting":"2020-02-25T21:00:56.000Z","ending":"2020-02-26T01:00:56.083Z","category":"Divertissement","notes":""},"_id":"j6bJonPoN3QRTmCu"}
 {"time":1583194381000,"evenement":{"title":"Algebre, TD Prog. Impé","starting":"2020-03-02T13:00:11.000Z","ending":"2020-03-02T16:45:11.000Z","category":"In Class","notes":"Poke, Antimatière"},"_id":"jI1cqgLCKCKj3hiQ"}
 {"time":1582472671000,"evenement":{"title":"From Nantes to Paris","starting":"2020-02-23T09:00:32.228Z","ending":"2020-02-23T14:45:32.228Z","category":"Transportation","notes":"By car and doing a stop to eat at Mc Donald at le Mans"},"_id":"jU4wYn1fgrgf3qmX"}
@@ -141,6 +147,7 @@
 {"time":1584147022000,"evenement":{"title":"","starting":"2020-03-13T10:00:04.000Z","ending":"2020-03-13T11:00:04.000Z","category":"Divertissement","notes":""},"_id":"lB3SKIhUXs6Vceft"}
 {"time":1582754743000,"evenement":{"title":"Médecin","starting":"2020-02-26T16:03:33.642Z","ending":"2020-02-26T16:10:33.642Z","category":"Santé","notes":"Certificat Parachutisme"},"_id":"lJR9jj5yZaTiuklO"}
 {"time":1583563439000,"evenement":{"title":"RER and Bike","starting":"2020-03-05T16:45:21.000Z","ending":"2020-03-05T18:00:21.000Z","category":"Transportation","notes":""},"_id":"ltZW3XEwGrGE40Fj"}
+{"time":1584226847000,"evenement":{"title":"Block Arkose Nation","starting":"2020-03-14T08:30:31.198Z","ending":"2020-03-14T11:30:31.198Z","category":"Sport","notes":"Découverte de la salle, grande, début seul au sous sol, 1 jaune, 5 vertes, projet : 3 bleus, 1 verte, 1 rouge"},"_id":"lxEex6EBNyR9N5JR"}
 {"time":1583882148000,"evenement":{"title":"A la bilbi","starting":"2020-03-10T10:30:24.000Z","ending":"2020-03-10T11:00:24.000Z","category":"Sleep","notes":""},"_id":"lyUlPSOunxTrvUAa"}
 {"time":1583563994000,"evenement":{"title":"RER and Bike","starting":"2020-03-06T16:50:48.000Z","ending":"2020-03-06T17:55:48.000Z","category":"Transportation","notes":""},"_id":"mBsFXb3qo7lCKwzg"}
 {"time":1582675269000,"evenement":{"title":"Méca TD, Algebre Lineare","starting":"2020-02-25T12:30:45.000Z","ending":"2020-02-25T16:15:45.000Z","category":"Exam","notes":"Mal preparer pour les exos preparer d'Algebre"},"_id":"my0PKzmTVbZWX1LJ"}
@@ -173,6 +180,7 @@
 {"time":1583881828000,"evenement":{"title":"RER and Bike","starting":"2020-03-09T15:00:49.000Z","ending":"2020-03-09T16:00:49.000Z","category":"Transportation","notes":""},"_id":"t9eteKsL197hvgR2"}
 {"time":1583193930000,"evenement":{"title":"","starting":"2020-03-01T21:17:30.121Z","ending":"2020-03-01T23:50:30.121Z","category":"Divertissement","notes":""},"_id":"tQ2RlVLWCbfPvKIM"}
 {"time":1583194204000,"evenement":{"title":"Youtube","starting":"2020-02-29T20:46:44.000Z","ending":"2020-02-29T23:56:44.000Z","category":"Divertissement","notes":""},"_id":"upoWxP2aYbuRZ6tw"}
+{"time":1584226957000,"evenement":{"title":"On you","starting":"2020-03-14T17:00:02.000Z","ending":"2020-03-14T20:10:02.000Z","category":"Work","notes":""},"_id":"uyy9rRD4ocn393Ar"}
 {"time":1582578799000,"evenement":{"title":"Meca 2, Prog. Impé","starting":"2020-02-24T07:15:37.294Z","ending":"2020-02-24T11:00:37.294Z","category":"In Class","notes":""},"_id":"v1GbIWA9yceE4Wkf"}
 {"time":1584147075000,"evenement":{"title":"Courses","starting":"2020-03-13T11:10:25.000Z","ending":"2020-03-13T12:10:25.000Z","category":"Work","notes":""},"_id":"vSIwc7u2M9nIXXFb"}
 {"time":1583882321000,"evenement":{"title":"Again Chimie","starting":"2020-03-10T19:10:17.000Z","ending":"2020-03-10T23:00:17.000Z","category":"Work","notes":""},"_id":"vgSxwi8zjWm546dC"}
@@ -192,10 +200,3 @@
 {"time":1579985832000,"evenement":{"title":"JJHJS","starting":"2020-01-23T04:18:55.357Z","ending":"2020-01-23T12:49:55.357Z","category":"Sport","notes":"JKjdkslfjs"},"_id":"z0g1gDhSnziBt1Mv"}
 {"time":1582754961000,"evenement":{"title":"Video + installation adobe","starting":"2020-02-26T19:30:34.874Z","ending":"2020-02-26T22:30:34.874Z","category":"Divertissement","notes":""},"_id":"z9NN3uN4rLDp38RC"}
 {"time":1584146946000,"evenement":{"title":"","starting":"2020-03-12T21:40:51.000Z","ending":"2020-03-13T00:40:51.000Z","category":"Divertissement","notes":""},"_id":"zO6AUcfhIfMRiwai"}
-{"time":1584226599000,"evenement":{"title":"","starting":"2020-03-14T01:00:43.571Z","ending":"2020-03-14T07:00:43.571Z","category":"Sleep","notes":""},"_id":"Z3LiQPGvlxUiEduQ"}
-{"time":1584226649000,"evenement":{"title":"Metro","starting":"2020-03-14T07:30:41.746Z","ending":"2020-03-14T08:30:41.746Z","category":"Transportation","notes":"From Home to Arkose Nation"},"_id":"4w5IKpfwsMAHyPVM"}
-{"time":1584226847000,"evenement":{"title":"Block Arkose Nation","starting":"2020-03-14T08:30:31.198Z","ending":"2020-03-14T11:30:31.198Z","category":"Sport","notes":"Découverte de la salle, grande, début seul au sous sol, 1 jaune, 5 vertes, projet : 3 bleus, 1 verte, 1 rouge"},"_id":"lxEex6EBNyR9N5JR"}
-{"time":1584226891000,"evenement":{"title":"Metro","starting":"2020-03-14T11:50:53.000Z","ending":"2020-03-14T12:45:53.000Z","category":"Transportation","notes":""},"_id":"ioqtn79JPvm7TwIX"}
-{"time":1584226920000,"evenement":{"title":"","starting":"2020-03-14T13:45:41.000Z","ending":"2020-03-14T16:10:41.000Z","category":"Sleep","notes":""},"_id":"99C5YDx4eNmGB5u7"}
-{"time":1584226957000,"evenement":{"title":"On you","starting":"2020-03-14T17:00:02.000Z","ending":"2020-03-14T20:10:02.000Z","category":"Work","notes":""},"_id":"uyy9rRD4ocn393Ar"}
-{"time":1584226985000,"evenement":{"title":"On you","starting":"2020-03-14T21:00:39.000Z","ending":"2020-03-14T23:00:39.000Z","category":"Work","notes":""},"_id":"eZ2JngUKYh1zbjJ7"}

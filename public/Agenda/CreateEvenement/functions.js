@@ -1,6 +1,3 @@
-
-
-
 function create_buttons() {
 
     button_home = createButton('Home');
@@ -61,7 +58,7 @@ function create_sliders() {
 function create_selecter() {
     selecter_category = createSelect();
     selecter_category.position(110, 195);
-    update_selecter();
+
 }
 
 async function update_selecter() {
@@ -103,6 +100,12 @@ function draw_text() {
 
     text("Notes : ", 0, 230);
 
+    for (t of textToDraw) {
+        textSize(15);
+        noStroke();
+        fill(0);
+        text(t.txt, t.x + 15, t.y + 7);
+    }
 
 
 
@@ -146,6 +149,39 @@ function title_input() {
 
 function fnxcategory() {
     console.log('Category is: ', this.value());
+
+    const myNode = document.getElementById("Addcategory");
+    while (myNode.firstChild) {
+        myNode.removeChild(myNode.lastChild);
+    }
+
+    let indice;
+    for (let i = 0; i < categories.length; i++) {
+        if (categories[i].name == this.value()) {
+            indice = i;
+            textToDraw = [];
+        }
+    }
+
+    for (let i = 0; i < categories[indice].sub.length; i++) {
+        const sub = categories[indice].sub[i];
+        console.log(sub.title);
+
+        const x = i * 100 + 250;
+        const y = 195;
+
+        let zert = document.createElement('input');
+        zert.type = "checkbox";
+        zert.id = "zert" + i;
+        zert.style = "position: absolute; left: " + x + "px; top: " + y + "px";
+        zert.label = sub.title;
+
+        document.getElementById("Addcategory").appendChild(zert);
+        subcategoriescheckboxes.push(zert);
+
+        textToDraw.push({ txt: sub.title, x: x, y: y });
+
+    }
 }
 
 function notes_input() {
@@ -255,6 +291,7 @@ function refreshEvenement() {
         evenement.starting = starting,
         evenement.ending = ending,
         evenement.category = selecter_category.value(),
+        evenement.sub_categories = sub_categories();
         evenement.notes = input_notes.value()
     //console.log("Normal Evenement : ", evenement)
 }
@@ -294,11 +331,23 @@ async function requestCategories() {
     const received_data = json.data;
 
 
-    console.log(received_data);
+    console.log("received_data", received_data);
 
     categories = received_data;
 
     update_selecter();
 
 
+}
+
+function sub_categories(){
+
+    result = [];
+    for(check of subcategoriescheckboxes){
+        if(check.checked){
+            result.push(check.label);
+        }
+    }
+
+    return result;
 }

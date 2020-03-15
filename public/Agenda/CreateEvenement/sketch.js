@@ -9,6 +9,9 @@ let myStorage;
 let evenement = {};
 let starting;
 let ending;
+let AddcategoryDiv;
+let subcategoriescheckboxes = [];
+let textToDraw = [];
 
 
 
@@ -28,6 +31,12 @@ function setup() {
     create_selecter();
 
     checkForModification();
+
+
+
+    AddcategoryDiv = document.createElement('div');
+    document.body.appendChild(AddcategoryDiv);
+    AddcategoryDiv.id = "Addcategory";
 
 }
 
