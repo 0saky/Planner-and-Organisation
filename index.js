@@ -18,40 +18,8 @@ const TasksStore = require('nedb');
 let tasks = new TasksStore('Tasks.db');
 tasks.loadDatabase();
 
-/*
-let evenements = [
-    {
-        title: "Watching videos",
-        starting: "2020-01-25T11:00:00",
-        ending:"2020-01-25T12:35:00",
-        category:"Divertisment"
-    },
-    {
-        title:"Doing push-ups",
-        starting:"2020-01-24T14:30:00",
-        ending:"2020-01-24T15:00:00",
-        category:"Sport"
-    },
-    {
-        title:"Sleeping",
-        starting:"2020-01-23T22:46:00",
-        ending:"2020-01-24T10:15:00",
-        category:"Sleep"
-    }
-]
-
-
-for(let i = 0; i < evenements.length; i++){
-    database.insert({time: Date.parse(new Date(Date.now())), evenement: evenements[i]})
-}
-*/
-
-
-
 app.post('/receveEvenements', (request, response) => {
     const receved = request.body;
-
-
 
     let start = new Date(receved.start_date);
     start.setDate(start.getDate() - 1);
@@ -93,7 +61,7 @@ app.post('/addEvenements', (request, response) => {
         status: 'Sucessfuly receved',
     });
 
-  //  console.log('Response send');
+    //  console.log('Response send');
 });
 
 app.post('/ModifiedEvenement', (request, response) => {
@@ -117,7 +85,7 @@ app.post('/ModifiedEvenement', (request, response) => {
         status: 'Sucessfuly receved',
     });
 
-   // console.log('Response send');
+    // console.log('Response send');
 });
 
 app.post('/ListOfCategories', (request, response) => {
@@ -138,7 +106,7 @@ app.post('/ListOfCategories', (request, response) => {
         data: to_send
     });
 
-  //  console.log('Response list of categories send: ', to_send);
+    //  console.log('Response list of categories send: ', to_send);
 });
 
 
@@ -150,7 +118,7 @@ app.post('/addCategorie', (request, response) => {
 
     const category = request.body;
 
-   // console.log(category);
+    // console.log(category);
 
 
     categories.insert({ time: Date.parse(new Date(Date.now())), category });
@@ -159,7 +127,7 @@ app.post('/addCategorie', (request, response) => {
         status: 'Sucessfuly receved',
     });
 
-  //  console.log('Response send');
+    //  console.log('Response send');
 });
 
 app.post('/addTask', (request, response) => {
@@ -169,7 +137,7 @@ app.post('/addTask', (request, response) => {
 
     const task = request.body;
 
-  //  console.log(task);
+    //  console.log(task);
 
 
     tasks.insert({ task });
@@ -178,7 +146,7 @@ app.post('/addTask', (request, response) => {
         status: 'Sucessfuly receved',
     });
 
-   // console.log('Response send');
+    // console.log('Response send');
 });
 
 app.post('/ListOfTasks', (request, response) => {
@@ -217,7 +185,7 @@ app.post('/ModifiedCategory', (request, response) => {
         status: 'Sucessfuly receved',
     });
 
-   // console.log('Response send');
+    // console.log('Response send');
 });
 
 app.post('/idTaskdetails', (request, response) => {
@@ -230,7 +198,7 @@ app.post('/idTaskdetails', (request, response) => {
     tasks.find({ _id: receved }, function (err, docs) {
         if (err) return reject(err);
         if (docs) {
-          
+
             task = docs[0].task;
             task.id = docs[0]._id;
 
@@ -261,7 +229,7 @@ app.post('/ModifyTask', (request, response) => {
         CreationTime: receved.CreationTime
     }
 
-    tasks.update({ _id: receved.id }, {task: task}, {});
+    tasks.update({ _id: receved.id }, { task: task }, {});
 
     response.json({
         status: 'Sucessfuly receved',
@@ -271,4 +239,59 @@ app.post('/ModifyTask', (request, response) => {
 });
 
 
+
+app.post('/StatsOfCategories', (request, response) => {
+    const receved = request.body;
+
+    console.log("Stats of categories: ", receved);
+
+    const Data = database.getAllData();
+    const Categories = categories.getAllData();
+
+    let categoriesArray = [];
+    for (let cat of Categories) {
+        let category = cat.category;
+        category.cummulative = 0;
+        category.numberOfEvent = 0;
+        categoriesArray.push(category);
+    }
+    // console.log(categoriesArray);
+
+    for (let eve of Data) {
+        const evenement = eve.evenement;
+        if (evenement.category != undefined) {
+            const time = new Date((Date.parse(new Date(evenement.ending)) - Date.parse(new Date(evenement.starting))));
+            let options = { hour12: false, hour: "numeric", minute: "2-digit" }
+            let lang = "en-US";
+            let write = new Intl.DateTimeFormat(lang, options).format(time);
+            //  console.log(evenement.category + ": ", write);
+            for (let category of categoriesArray) {
+                if (evenement.category == category.name) {
+                    category.cummulative += Date.parse(time);
+                    category.numberOfEvent++;
+                }
+            }
+        }
+
+    }
+
+    categoriesArray.sort((a, b) => parseFloat(b.cummulative) - parseFloat(a.cummulative));
+
+    for (let category of categoriesArray) {
+        category.cummulative += Date.parse(new Date(Date.UTC(2000, 0, 01, 0, 0, 0)));
+       // let options = { timeZone: "UTC", year: "2-digit", month: "numeric", day: "numeric", hour12: false, hour: "numeric", minute: "2-digit" };
+       let options = { timeZone: "UTC", year: "numeric", month: "long", day: "numeric", hour12: false, hour: "numeric", minute: "2-digit" };
+       let lang = "en-US";
+        let write = new Intl.DateTimeFormat(lang, options).format(category.cummulative);
+        console.log(category.name + ": ", write, "with ", category.numberOfEvent, " events");
+    }
+
+
+    response.json({
+        status: 'Sucessfuly receved',
+        categories: categoriesArray
+    });
+
+    // console.log('Response send');
+});
 
