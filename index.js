@@ -243,10 +243,71 @@ app.post('/ModifyTask', (request, response) => {
 app.post('/StatsOfCategories', (request, response) => {
     const receved = request.body;
 
-    console.log("Stats of categories: ", receved);
+    console.log("Stats of categories: ", receved.duration, new Date(receved.date));
 
     const Data = database.getAllData();
     const Categories = categories.getAllData();
+
+    let datalist = [];
+    let start = new Date(2020, 0, 19, 0, 0, 0, 0);
+    let end;
+
+    if (receved.duration == "All Time") {
+        datalist = Data;
+    } else {
+        if (receved.duration == "Year") {
+            start = new Date(receved.date);
+            start.setUTCMonth(0);
+            start.setUTCDate(1);
+            start.setUTCHours(0);
+            start.setUTCMinutes(0);
+            start.setUTCSeconds(0);
+            start.setUTCMilliseconds(0);
+            end = new Date(Date.parse(start));
+            end.setUTCFullYear(start.getUTCFullYear() + 1);
+        } else if (receved.duration == "Month") {
+            start = new Date(receved.date);
+            start.setUTCDate(1);
+            start.setUTCMonth(start.getUTCMonth()-1);
+            start.setUTCHours(0);
+            start.setUTCMinutes(0);
+            start.setUTCSeconds(0);
+            start.setUTCMilliseconds(0);
+            end = new Date(Date.parse(start));
+            end.setUTCMonth(end.getUTCMonth() + 1);
+        } else if (receved.duration == "Week") {
+            start = new Date(receved.date);
+            start.setUTCDate(start.getUTCDate() - 6);
+            start.setUTCHours(0);
+            start.setUTCMinutes(0);
+            start.setUTCSeconds(0);
+            start.setUTCMilliseconds(0);
+            end = new Date(Date.parse(start));
+            end.setUTCDate(start.getUTCDate() + 7);
+        } else if (receved.duration == "Day") {
+            start = new Date(receved.date);
+            start.setUTCDate(start.getUTCDate() - 1);
+            start.setUTCHours(0);
+            start.setUTCMinutes(0);
+            start.setUTCSeconds(0);
+            start.setUTCMilliseconds(0);
+            end = new Date(Date.parse(start));
+            end.setUTCDate(start.getUTCDate() + 1);
+        }
+
+        console.log("Start:", start, " End: ", end);
+
+        for (let i = 0; i < Data.length; i++) {
+            
+            const time_start = new Date(Data[i].evenement.starting);
+    
+            const time_end = new Date(Data[i].evenement.ending);
+    
+            if (time_end > start && time_start < end) {
+                datalist.push(Data[i]);
+            }
+        }
+    }
 
     let categoriesArray = [];
     for (let cat of Categories) {
@@ -257,13 +318,11 @@ app.post('/StatsOfCategories', (request, response) => {
     }
     // console.log(categoriesArray);
 
-    for (let eve of Data) {
+    for (let eve of datalist) {
         const evenement = eve.evenement;
         if (evenement.category != undefined) {
             const time = new Date((Date.parse(new Date(evenement.ending)) - Date.parse(new Date(evenement.starting))));
-            let options = { hour12: false, hour: "numeric", minute: "2-digit" }
-            let lang = "en-US";
-            let write = new Intl.DateTimeFormat(lang, options).format(time);
+            
             //  console.log(evenement.category + ": ", write);
             for (let category of categoriesArray) {
                 if (evenement.category == category.name) {
@@ -279,9 +338,9 @@ app.post('/StatsOfCategories', (request, response) => {
 
     for (let category of categoriesArray) {
         category.cummulative += Date.parse(new Date(Date.UTC(2000, 0, 01, 0, 0, 0)));
-       // let options = { timeZone: "UTC", year: "2-digit", month: "numeric", day: "numeric", hour12: false, hour: "numeric", minute: "2-digit" };
-       let options = { timeZone: "UTC", year: "numeric", month: "long", day: "numeric", hour12: false, hour: "numeric", minute: "2-digit" };
-       let lang = "en-US";
+        // let options = { timeZone: "UTC", year: "2-digit", month: "numeric", day: "numeric", hour12: false, hour: "numeric", minute: "2-digit" };
+        let options = { timeZone: "UTC", year: "numeric", month: "long", day: "numeric", hour12: false, hour: "numeric", minute: "2-digit" };
+        let lang = "en-US";
         let write = new Intl.DateTimeFormat(lang, options).format(category.cummulative);
         console.log(category.name + ": ", write, "with ", category.numberOfEvent, " events");
     }
@@ -289,7 +348,8 @@ app.post('/StatsOfCategories', (request, response) => {
 
     response.json({
         status: 'Sucessfuly receved',
-        categories: categoriesArray
+        categories: categoriesArray,
+        start_Date: start
     });
 
     // console.log('Response send');
