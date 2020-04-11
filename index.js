@@ -2,7 +2,7 @@
 //Run the server
 const express = require('express');
 const app = express();
-app.listen(3000, () => console.log('Listening at port 3000'));
+app.listen(8080, () => console.log('Listening at port 3000'));
 app.use(express.static('public'));
 app.use(express.json());
 
@@ -22,7 +22,6 @@ app.post('/receveEvenements', (request, response) => {
     const receved = request.body;
 
     let start = new Date(receved.start_date);
-    start.setDate(start.getDate() - 1);
     const end = new Date(receved.end_date);
 
     console.log("Receved a request : start = ", start, " end = ", end);

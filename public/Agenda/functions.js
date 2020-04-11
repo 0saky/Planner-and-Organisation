@@ -1,192 +1,201 @@
-//import { text } from "express";
-
-function draw_clumnlines(i, bool1, bool2) {
-
-    const column = (i - 0.5) * width / numberofdays + 165;
-    stroke(0);
-    if (bool2) {
-        strokeWeight(5);
-        line(column, 15, column, height);
-    } else if (bool1) {
-        strokeWeight(5);
-        line(column, 70, column, height);
-    } else {
-        strokeWeight(3);
-        line(column, 70, column, height);
+function upDates() {
+    dates[0] = new Date(date);
+    dates[0].setDate(date.getDate() - Math.floor(numberofdays / 2))
+    for (let i = 1; i < numberofdays; i++) {
+        let temp = new Date(dates[i - 1]);
+        temp.setDate(temp.getDate() + 1);
+        dates[i] = new Date(temp);
     }
 }
 
-function draw_rowlines() {
+function create_DOMS() {
 
-    for (let i = 1; i < 6; i++) {
-        const y = map(map(i, 0, 6, 0, 24), 0, 24, 70, height);
-        stroke(0, 0, 0, 50);
-        strokeWeight(4);
+    let Head = document.createElement('div');
+    Head.classList = "Head";
+    Head.id = "Head";
+    main.appendChild(Head);
 
-        line(40, y, width, y);
+    let titre = document.createElement('h1');
+    Head.appendChild(titre);
+    titre.textContent = "Agenda";
+    titre.classList = "Title";
 
-        noStroke();
-        textSize(20)
-        textAlign(LEFT);
-        fill(0);
-        text(i * 4 + "h", 0, y);
+    let home = document.createElement('button');
+    Head.appendChild(home);
+    home.onclick = () => { window.location.href = '/..'; };
+    home.textContent = "Home";
 
+    let ManageCategories = document.createElement('button');
+    Head.appendChild(ManageCategories);
+    ManageCategories.onclick = () => { window.location.href = 'ManageCategories'; };
+    ManageCategories.textContent = "ManageCategories";
+
+    let CreateEvenement = document.createElement('button');
+    Head.appendChild(CreateEvenement);
+    CreateEvenement.onclick = () => { window.location.href = 'CreateEvenement'; };
+    CreateEvenement.textContent = "CreateEvenement";
+
+    let div = document.createElement('div');
+    div.id = "HBouttons";
+    div.classList = "Bouttons";
+    main.appendChild(div);
+
+    let button_pyear = document.createElement('button');
+    div.appendChild(button_pyear);
+    button_pyear.textContent = "<<<";
+
+
+    center = document.createElement('div');
+    div.appendChild(center);
+    center.classList = "Hcenter";
+
+    for (let i = 0; i < numberofdays; i++) {
+        let p = document.createElement('p');
+        p.classList = "parayear";
+        p.classList = "parainfo";
+        center.appendChild(p);
+        parayears.push(p);
     }
+
+    let button_nyear = document.createElement('button');
+    div.appendChild(button_nyear);
+    button_nyear.textContent = ">>>";
+
+
+    let button_pmonths = document.createElement('button');
+    div.appendChild(button_pmonths);
+    button_pmonths.textContent = "<<";
+
+
+    center = document.createElement('div');
+    div.appendChild(center);
+    center.classList = "Hcenter";
+
+    for (let i = 0; i < numberofdays; i++) {
+        let p = document.createElement('p');
+        p.classList = "paramonths";
+        p.classList = "parainfo";
+        center.appendChild(p);
+        paramonths.push(p);
+    }
+
+    let button_nmonths = document.createElement('button');
+    div.appendChild(button_nmonths);
+    button_nmonths.textContent = ">>";
+
+
+    let button_pday = document.createElement('button');
+    div.appendChild(button_pday);
+    button_pday.textContent = "<";
+
+
+    center = document.createElement('div');
+    div.appendChild(center);
+    center.classList = "Hcenter";
+
+    for (let i = 0; i < numberofdays; i++) {
+        let p = document.createElement('p');
+        p.classList = "paradays";
+        p.classList = "parainfo";
+        center.appendChild(p);
+        paradays.push(p);
+    }
+
+    let button_nday = document.createElement('button');
+    div.appendChild(button_nday);
+    button_nday.textContent = ">";
+
+    button_pyear.onclick = pyear;
+    button_nyear.onclick = nyear;
+    button_pmonths.onclick = pmonths;
+    button_nmonths.onclick = nmonths;
+    button_pday.onclick = pday;
+    button_nday.onclick = nday;
+
 }
-
-function draw_text() {
-
-    textSize(30);
-    noStroke();
-    fill(0);
-
-    text("Agenda", 0, 30);
-
-
-}
-
-function create_buttons() {
-
-    button_pyear = createButton('Prévious');
-    button_pyear.position(15, 15);
-    button_pyear.mousePressed(pyear);
-
-    button_nyear = createButton('Next');
-    button_nyear.position(width - 30, 15);
-    button_nyear.mousePressed(nyear);
-
-    button_pmonths = createButton('Prévious');
-    button_pmonths.position(15, 45);
-    button_pmonths.mousePressed(pmonths);
-
-    button_nmonths = createButton('Next');
-    button_nmonths.position(width - 30, 45);
-    button_nmonths.mousePressed(nmonths);
-
-    button_pday = createButton('Prévious');
-    button_pday.position(15, 75);
-    button_pday.mousePressed(pday);
-
-    button_nday = createButton('Next');
-    button_nday.position(width - 30, 75);
-    button_nday.mousePressed(nday);
-
-    button_home = createButton('Home');
-    button_home.position(120, 20);
-    button_home.attribute('onclick', "window.location.href = '/..';");
-
-    button_createEvenement = createButton('Create New Evenement');
-    button_createEvenement.position(180, 20);
-    button_createEvenement.attribute('onclick', "window.location.href = 'CreateEvenement';");
-
-    button_createEvenement = createButton('Manage Categories');
-    button_createEvenement.position(350, 20);
-    button_createEvenement.attribute('onclick', "window.location.href = 'ManageCategories';");
-
-
-}
-
-
-
 
 function pday() {
-    date = new Date(Date.parse(date) - increment);
-    SyncData();
+
+    date.setDate(date.getDate() - 1);
+    console.log("Going 1 day back to ", date);
+    upSync();
 }
 
 function nday() {
-    date = new Date(Date.parse(date) + increment);
-    SyncData();
-}
+    date.setDate(date.getDate() + 1);
+    console.log("Going 1 day on to ", date);
+    upSync();
 
+}
 
 function pyear() {
-
-    date = new Date(date.getFullYear() - 1, 0, 1);
-    SyncData();
+    date.setFullYear(date.getFullYear() - 1);
+    console.log("Going 1 year back to ", date);
+    upSync();
 
 }
-function nyear() {
 
-    date = new Date(date.getFullYear() + 1, 0, 1);
-    SyncData();
+function nyear() {
+    date.setFullYear(date.getFullYear() + 1);
+    console.log("Going 1 year on to ", date);
+    upSync();
 
 }
 
 function pmonths() {
-
-    date = new Date(date.getFullYear(), date.getMonth() - 1, 1);
-    SyncData();
+    date.setMonth(date.getMonth() - 1);
+    console.log("Going 1 month back to ", date);
+    upSync();
 
 }
+
 function nmonths() {
+    date.setMonth(date.getMonth() + 1);
+    console.log("Going 1 month on to ", date);
+    upSync();
 
-    date = new Date(date.getFullYear(), date.getMonth() + 1, 1);
+}
+
+function upSync() {
+    upDates();
+    upHpara();
     SyncData();
-
 }
 
-function draw_now() {
-    const now = new Date(Date.now());
+function upHpara() {
 
     for (let i = 0; i < numberofdays; i++) {
-        if (sameDate(days_array[i], now)) {
-
-            const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 0, 0, 0, 0);
-            const next_day = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 0, 0);
-            const y = map(Date.parse(now), Date.parse(midnight), Date.parse(next_day), 70, height);
-            strokeWeight(5);
-            stroke(255, 0, 0);
-            line(i * (width / numberofdays) + 40, y, (i + 1) * (width / numberofdays) + 40, y);
-        }
+        parayears[i].textContent = dates[i].getFullYear();
+        let options = { month: "long" };
+        let write = new Intl.DateTimeFormat(lang, options).format(dates[i]);
+        paramonths[i].textContent = write;
+        options = { weekday: "short", day: "numeric" };
+        write = new Intl.DateTimeFormat(lang, options).format(dates[i]);
+        paradays[i].textContent = write;
     }
 }
 
-function draw_past() {
-    for (let i = 0; i < numberofdays; i++) {
-        const test_date = days_array[i];
-
-        for (let j = 0; j < evenements.length; j++) {
-            // console.log(evenements[j].starting);
-            start_time = new Date(evenements[j].starting);
-            end_time = new Date(evenements[j].ending);
-
-            const midnight = new Date(test_date.getFullYear(), test_date.getMonth(), test_date.getDate(), 0, 0, 0, 0);
-            const next_day = new Date(test_date.getFullYear(), test_date.getMonth(), test_date.getDate() + 1, 0, 0, 0, 0);
-            //console.log(start_time);
-            if (Date.parse(start_time) < Date.parse(next_day) && Date.parse(end_time) > Date.parse(midnight)) {
-
-                //console.log("Evenement a afficher : " + start_time + "Jusqu'a :" + end_time);
-                let a = 20;
-                let b = 20;
-
-
-                if (Date.parse(start_time) < Date.parse(midnight)) {
-                    start_time = midnight;
-                    a = 30;
-                }
-                if (Date.parse(end_time) > Date.parse(next_day)) {
-                    end_time = next_day;
-                    b = 00;
-
-                }
-
-                const py = map(Date.parse(start_time), Date.parse(midnight), Date.parse(next_day), 70, height);
-                const ny = map(Date.parse(end_time), Date.parse(midnight), Date.parse(next_day), 70, height);
-
-                evenements_onpagePosition.push({
-                    evenement_id: j,
-                    px: i * (width / numberofdays) + 40,
-                    py: py,
-                    nx: (i + 1) * (width / numberofdays) + 40,
-                    ny: ny
-                })
-
-            }
-        }
+function uplegend() {
+    reset(legend);
+    for (let i = 0; i < 24; i++) {
+        let div = document.createElement('div');
+        legend.appendChild(div);
+        div.classList = "Lines";
+        let height = i * calendar.clientHeight / 24;
+        div.style = `height: ${height}px`;
+        let time = document.createElement('p');
+        time.textContent = i + ":00";
+        time.classList = "time";
+        time.style = `margin-top: ${height}px`;
+        legend.appendChild(time);
     }
 }
 
+function reset(node) {
+    while (node.childElementCount) {
+        node.removeChild(node.firstChild);
+    }
+}
 
 function getColor(init) {
 
@@ -200,31 +209,6 @@ function getColor(init) {
     return 0;
 }
 
-async function drawrect() {
-    noStroke();
-
-    for (let i = 0; i < evenements_onpagePosition.length; i++) {
-
-        const color = getColor(evenements[evenements_onpagePosition[i].evenement_id].category);
-
-        fill(color);
-
-        rectMode(CORNERS);
-
-        const position = evenements_onpagePosition[i];
-
-        rect(position.px, position.py, position.nx, position.ny, 20, 20, 20, 20);
-    }
-
-}
-
-function sameDate(date1, date2) {
-    if (date1.getFullYear() == date2.getFullYear() && date1.getMonth() == date2.getMonth() && date1.getDate() == date2.getDate()) {
-        return true;
-    }
-    return false;
-}
-
 async function SyncData() {
 
     console.log('Sending');
@@ -232,6 +216,7 @@ async function SyncData() {
     const start_time = getfirstTime();
     const end_time = getEndTime();
 
+    //console.log(start_time, end_time);
 
     const data = {
         start_date: start_time,
@@ -249,95 +234,15 @@ async function SyncData() {
 
     const received_data = json.data;
 
+    evenements = [];
+
     for (let i = 0; i < received_data.length; i++) {
         evenements.push(received_data[i]);
     }
     console.log(evenements);
 
+    DrawEvent();
 }
-
-function getfirstTime() {
-    let temp = new Date(days_array[0]);
-    temp.setHours(0);
-    temp.setMinutes(0);
-    return Date.parse(temp);
-}
-
-function getEndTime() {
-    let temp = new Date(Date.parse(days_array[numberofdays - 1]) + 86400000);
-
-    temp.setHours(0);
-    temp.setMinutes(0);
-    return Date.parse(temp);
-
-}
-
-function mouse_over() {
-    // console.log(mouseX, mouseY);
-    for (let i = 0; i < evenements_onpagePosition.length; i++) {
-        const position = evenements_onpagePosition[i];
-
-        if (mouseX > position.px && mouseX < position.nx && mouseY > position.py && mouseY < position.ny) {
-            //console.log(evenements[position.evenement_id]);
-            return evenements[position.evenement_id];
-
-        }
-    }
-
-    return "NaN";
-
-}
-
-function mouse_overEvenementInfo() {
-    const response = mouse_over();
-    //console.log("checking");
-    if (response != "NaN") {
-        //console.log("On a evenement")
-        draw_evenementInfo(response);
-    }
-}
-
-function mouseReleased() {
-    const response = mouse_over();
-    if (response != "NaN") {
-        //console.log("Going to modify : ", response);
-        localStorage.clear();
-        localStorage.setItem("ToModify", JSON.stringify(response));
-        window.location.href = 'CreateEvenement';
-    }
-}
-
-function draw_evenementInfo(Evenement_description) {
-    console.log(Evenement_description);
-    translate(mouseX, mouseY);
-
-    let rect_length = Evenement_description.title.length * 15;
-    if (rect_length < 100) {
-        rect_length = 100;
-    }
-
-    rectMode(CORNER);
-    fill(255, 255, 255, 210);
-    rect(0, 0, rect_length, 100, 10, 10);
-
-    fill(0);
-    textSize(20);
-    text(Evenement_description.title, 20, 20);
-    textSize(15);
-
-    options = { hour: "2-digit", minute: "2-digit" }
-    let start_time_Event = new Date(Evenement_description.starting);
-    let end_time_Event = new Date(Evenement_description.ending);
-    let write = new Intl.DateTimeFormat(lang, options).format(start_time_Event);
-    text(write, 20, 45);
-    write = new Intl.DateTimeFormat(lang, options).format(end_time_Event);
-    text(write, 20, 60);
-
-    textSize(15);
-    text(Evenement_description.notes, 20, 80);
-
-}
-
 
 async function requestCategories() {
 
@@ -362,4 +267,73 @@ async function requestCategories() {
 
     categories = received_data;
 
+}
+
+function getfirstTime() {
+    let temp = new Date(dates[0]);
+    temp.setHours(0, 0, 0, 0);
+    return Date.parse(temp);
+}
+
+function getEndTime() {
+    let temp = new Date(dates[numberofdays - 1]);
+    temp.setDate(temp.getDate() + 1);
+    temp.setHours(0, 0, 0, 0);
+    return Date.parse(temp);
+}
+
+function DrawEvent() {
+    let DOMS = document.getElementsByClassName('day');
+    for (let i = 0; i < numberofdays; i++) {
+        let DOM = DOMS[i];
+        reset(DOM);
+        let day_start = new Date(dates[i]);
+        day_start.setHours(0, 0, 0, 0);
+        let day_end = new Date(day_start);
+        day_end.setDate(day_start.getDate() + 1);
+        for (let event of evenements) {
+            if (Date.parse(event.starting) < Date.parse(day_end) && Date.parse(event.ending) > Date.parse(day_start)) {
+                let div = document.createElement('div');
+                div.classList = 'Event';
+                div.id = event.title;
+                div.onmouseover = () => { console.log(event) }
+                let top = map(Date.parse(event.starting), Date.parse(day_start), Date.parse(day_end), 0, DOM.clientHeight);
+                let bottom = map(Date.parse(event.ending), Date.parse(day_start), Date.parse(day_end), 0, DOM.clientHeight);
+                let write = "";
+                if (Date.parse(event.starting) < Date.parse(day_start)) {
+                    top = 0;
+                    write += "border-top-left-radius: 0px; border-top-right-radius: 0px; ";
+                }
+                if (Date.parse(event.ending) > Date.parse(day_end)) {
+                    bottom = DOM.clientHeight;
+                    write += "border-bottom-right-radius: 0px; border-bottom-left-radius: 0px; ";
+                }
+                height = bottom - top;
+                top += document.getElementById('Head').clientHeight + document.getElementById('HBouttons').clientHeight;
+                write += "top: " + top + "px; height: " + height + "px; width: " + DOM.clientWidth + "px; ";
+                let color = getColor(event.category);
+                write += "background-color: " + color + "; ";
+                //console.log(write);
+                div.style = write;
+                DOM.appendChild(div);
+                let titre = document.createElement('h5');
+                titre.textContent = event.title;
+                titre.classList = "ETitle";
+                div.appendChild(titre);
+                div.onclick = () => {
+                    localStorage.clear();
+                    localStorage.setItem("ToModify", JSON.stringify(event));
+                    window.location.href = 'CreateEvenement';
+                }
+            }
+        }
+    }
+
+
+}
+
+function map(x, in_min, in_max, out_min, out_max) {
+    let res = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    //console.log(res);
+    return res;
 }

@@ -1,0 +1,73 @@
+body{
+  /*! overflow: hidden; */
+  overflow-x: hidden;
+  margin: 0;
+}
+#HBouttons{
+    display: grid;
+    justify-content: normal;
+    grid-template-columns: 60px auto 60px;
+  }
+.headpn{
+  margin: 0px;
+}
+.Title{
+  margin:0px;
+  margin-right: 10px;
+}
+.Head{
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  align-items: center;
+  justify-content: start;
+}
+.Hcenter{
+  display: flex;
+  
+  /*! flex-grow: 2; */
+  width: 100% !important;
+}
+.parainfo{
+  margin: 0px;
+  flex-grow: 2;
+  text-align: center;
+}
+#calendar{
+  display: flex!important;
+  width: 100%!important;
+  flex: auto!important;
+  flex-direction: row!important;
+  
+  height: 86%;
+}
+.day{
+  background-color: #dedede94;
+  margin-left: 10px;
+  min-width: 250px;
+  flex-grow: 2;
+  border-left: #1d1d1d solid 3px;
+}
+.legend{
+  min-width: 50px;
+
+}
+.Lines{
+  border-bottom: #000 1px solid;
+  position: absolute;
+  width: 100%;
+}
+.time{
+  position: absolute;
+  margin: 0px;
+  margin-left: 10px;
+}
+.Event{
+  background-color: red;
+  position: absolute;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.ETitle{
+  margin: 5px;
+  color: white;
+}
