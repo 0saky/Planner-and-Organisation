@@ -13,8 +13,8 @@ localStorage.clear();
 
 let main = document.getElementById("main");
 
-numberofdays=1;
-while((numberofdays+2)*widthofDays < main.clientWidth){
+numberofdays = 1;
+while ((numberofdays + 2) * widthofDays < main.clientWidth) {
     numberofdays++;
 }
 dates = [numberofdays];
@@ -34,9 +34,13 @@ legend.classList = "legend";
 calendar.appendChild(legend);
 legend.onchange = uplegend();
 
-for(let i = 0; i < numberofdays; i++){
+let event_info = document.createElement('div');
+event_info.id = "event_info";
+calendar.appendChild(event_info);
+
+for (let i = 0; i < numberofdays; i++) {
     let day = document.createElement('div');
-    day.id = "day"+i;
+    day.id = "day" + i;
     day.classList = "day";
     calendar.appendChild(day);
 }
@@ -47,7 +51,34 @@ requestCategories();
 
 SyncData();
 
+main.addEventListener('click', function main_click(e) {
+  //  console.log("e", e);
+    let target = e.target;
+    let stay = true;
+    let condition = false;
 
+    do {
+       if(target.id == "main"){
+           stay = false;
+       } else {
+           if(target.classList){
+               for(let c of target.classList){
+                   if(c == "Event_tile"){
+                       condition = true;
+                       stay = false;
+                   }
+               }
+           }
+           target = target.parentNode;
+       }
+    }while(stay);
+
+   // console.log("Event_tile", condition);
+
+    if (!condition) {
+        reset(document.getElementById('event_info'));
+    }
+})
 
 
 

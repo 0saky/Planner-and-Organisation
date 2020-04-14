@@ -71,3 +71,38 @@ body{
   margin: 5px;
   color: white;
 }
+#Div_info{
+  position: absolute;
+  width: 350px;
+  height: 150px;
+  background-color: white;
+  border: black solid 2px;
+  border-radius: 6px;
+  
+  z-index: 3;
+  overflow: auto;
+}
+#info_title{
+  margin-bottom: 5px;
+  margin-top: 0;
+  margin-left: 5px;
+}
+#inf_times{
+  margin: 5px;
+  margin-left: 10px;
+}
+#div_icons{
+  display: flex;
+}
+.icons{
+  cursor: pointer;
+  margin: 5px;
+}
+#inf_category{
+  margin: 0px;
+  margin-left:10px;
+}
+#inf_notes{
+  margin: 0px;
+  margin-left:10px;
+}

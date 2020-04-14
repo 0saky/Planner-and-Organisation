@@ -37,8 +37,10 @@ app.post('/receveEvenements', (request, response) => {
         const time_end = new Date(data[i].evenement.ending);
 
         if (time_end > start && time_start < end) {
-            data[i].evenement.id = data[i]._id;
-            to_send.push(data[i].evenement);
+            if(!data[i].evenement.deleted){
+                data[i].evenement.id = data[i]._id;
+                to_send.push(data[i].evenement);
+            }
         }
     }
     response.json({
@@ -75,7 +77,8 @@ app.post('/ModifiedEvenement', (request, response) => {
         starting: receved.starting,
         ending: receved.ending,
         category: receved.category,
-        notes: receved.notes
+        notes: receved.notes,
+        deleted: receved.deleted
     }
 
     database.update({ _id: receved.id }, { time: time, evenement: evenement }, {});

@@ -295,8 +295,9 @@ function DrawEvent() {
             if (Date.parse(event.starting) < Date.parse(day_end) && Date.parse(event.ending) > Date.parse(day_start)) {
                 let div = document.createElement('div');
                 div.classList = 'Event';
+                div.className +=  " Event_tile";
                 div.id = event.title;
-                div.onmouseover = () => { console.log(event) }
+               // div.onmouseover = () => { console.log(event) }
                 let top = map(Date.parse(event.starting), Date.parse(day_start), Date.parse(day_end), 0, DOM.clientHeight);
                 let bottom = map(Date.parse(event.ending), Date.parse(day_start), Date.parse(day_end), 0, DOM.clientHeight);
                 let write = "";
@@ -319,11 +320,97 @@ function DrawEvent() {
                 let titre = document.createElement('h5');
                 titre.textContent = event.title;
                 titre.classList = "ETitle";
+             
                 div.appendChild(titre);
-                div.onclick = () => {
-                    localStorage.clear();
-                    localStorage.setItem("ToModify", JSON.stringify(event));
-                    window.location.href = 'CreateEvenement';
+                div.onclick = function Event_onClick () {
+                   // console.log("Event click");
+                    reset(event_info);
+                    let div_info = document.createElement('div');
+                    event_info.appendChild(div_info);
+                    div_info.id = "Div_info";
+                    div_info.classList = "Event_tile";
+                    div_info.onclick = Div_info_onClick;
+                    let top = div.offsetTop;
+                    let left = div.offsetLeft + div.offsetWidth;
+                    if (top + div_info.offsetHeight > calendar.offsetHeight) {
+                        top = calendar.offsetHeight - div_info.offsetHeight;
+                    }
+                    if (left + div_info.offsetWidth > calendar.offsetWidth) {
+                        left = div.offsetLeft - div_info.offsetWidth;
+                    }
+                    let write = "top: " + top + "px ; left: " + left + "px; ";
+                    div_info.style = write;
+                   // console.log(div);
+
+                   let div_icons = document.createElement('div');
+                   div_icons.id = "div_icons";
+                   
+                   div_info.appendChild(div_icons);
+
+                   let icon_modify = document.createElement('div');
+                   div_icons.appendChild(icon_modify);
+                   icon_modify.id = "icon_modify";
+                   icon_modify.classList = "icons";
+                  
+                   icon_modify.onclick = () => {
+                       localStorage.clear();
+                       localStorage.setItem("ToModify", JSON.stringify(event));
+                       window.location.href = 'CreateEvenement';
+                   }
+                   icon_modify.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" ><path d="M20.41 4.94l-1.35-1.35c-.78-.78-2.05-.78-2.83 0L3 16.82V21h4.18L20.41 7.77c.79-.78.79-2.05 0-2.83zm-14 14.12L5 19v-1.36l9.82-9.82 1.41 1.41-9.82 9.83z"></path></svg>`
+                   
+                   let icon_delete = document.createElement('div');
+                   div_icons.appendChild(icon_delete);
+                   icon_delete.id = "icon_delete";
+                   icon_delete.classList = "icons";
+                  
+                   icon_delete.onclick = () => {
+                      console.log("delete this? ", event);
+                      if (confirm(`Delete this? \n ${event.title}: \n ${event.category} \n ${event.starting} / ${event.ending}\n ${event.notes}`)) {
+                        console.log("confirmed")
+                        event.deleted = true;
+                        savemodifiedevent(event);
+                      } else {
+                        console.log("aboard")
+                      }
+                   }
+                   icon_delete.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" ><path d="M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path><path d="M9 8h2v9H9zm4 0h2v9h-2z"></path></svg>`;
+                  
+
+                    let event_title = document.createElement('h3');
+                    event_title.id = "info_title";
+                 
+                    div_info.appendChild(event_title);
+                    event_title.textContent = event.title;
+                    let options = {year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit"};
+                    let write2 = new Intl.DateTimeFormat(lang, options).format(new Date(event.starting));
+                    write2 += " - ";
+                    if(Date.parse(event.starting) < Date.parse(day_start) || Date.parse(event.ending) > Date.parse(day_end)){
+                        write2 += new Intl.DateTimeFormat(lang, options).format(new Date(event.ending));
+                    } else {
+                        options = {hour: "2-digit", minute: "2-digit"};
+                        write2 += new Intl.DateTimeFormat(lang, options).format(new Date(event.ending));
+                    }
+                    let inf_times = document.createElement('p');
+                    inf_times.id = "inf_times";
+                  
+                    div_info.appendChild(inf_times);
+                    inf_times.textContent = write2;
+
+                    let inf_category = document.createElement('p');
+                    div_info.appendChild(inf_category);
+                    inf_category.id = "inf_category";
+                    inf_category.textContent = event.category;
+
+                    let div_notes = document.createElement('div');
+                    div_notes.id = "div_notes";
+                    div_info.appendChild(div_notes);
+
+                    let inf_notes = document.createElement('p');
+                    div_notes.appendChild(inf_notes);
+                    inf_notes.id = "inf_notes";
+                    inf_notes.textContent = event.notes;
+
                 }
             }
         }
@@ -336,4 +423,22 @@ function map(x, in_min, in_max, out_min, out_max) {
     let res = (x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
     //console.log(res);
     return res;
+}
+
+async function savemodifiedevent(event) {
+    const sendoptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(event)
+    }
+    const response = await fetch('/ModifiedEvenement', sendoptions);
+    const json = await response.json();
+
+    console.log(json);
+
+    if (json.status == 'Sucessfuly receved') {
+        SyncData();
+    } else {alert("Somthing as went wrong")}
 }
