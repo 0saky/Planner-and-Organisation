@@ -402,19 +402,98 @@ function DrawEvent() {
                         }
                         div_info.appendChild(input_title);
 
+                        let icon_category = document.createElement('div');
+                        icon_category.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 99 99"><title>Asset 1</title><g id="add7470c-2201-4f7f-8555-2f3671b05c0a" data-name="Layer 2"><g id="b88ab875-f118-4f76-8547-812c600e33ef" data-name="Layer 1"><rect width="99" height="99" style="fill:none"/><circle cx="40" cy="20" r="9" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:5px"/><path d="M43,28c2,12,9,35,9,35s0,22,35,8" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:5px"/><path d="M45.68,40.28C46,39.52,70,21,70,54" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:5px"/><path d="M45.68,41.18S36,59,19,42" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:5px"/><path d="M51.77,62.24S18,65,33,90" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:5px"/></g></g></svg>`;
+                        div_info.appendChild(icon_category);
+                        icon_category.id = "icon_category";
+                        console.log("icon_category", icon_category);
+
                         let selecter = document.createElement('select');
-                        for(let cat of categories){
+                        selecter.id = "selecter";
+                        for (let cat of categories) {
                             let op = document.createElement('option');
                             op.value = cat.name;
                             op.textContent = cat.name;
                             selecter.appendChild(op);
                         }
                         div_info.appendChild(selecter);
+                        let selector_checkboxes = document.createElement('div');
+                        div_info.appendChild(selector_checkboxes);
+                        selector_checkboxes.id = "selector_checkboxes";
+
+
                         console.log("event.category", event.category);
                         selecter.value = event.category;
+                        getsubcat();
+
                         selecter.onchange = () => {
                             event.category = selecter.value;
+
+                            getsubcat();
+
                         }
+
+
+                        function getsubcat() {
+
+                            reset(selector_checkboxes);
+                            let indice = 0;
+
+                            for (let i = 0; i < categories.length; i++) {
+                                if (categories[i].name == selecter.value) {
+                                    indice = i;
+                                }
+                            }
+
+                            for (let i = 0; i < categories[indice].sub.length; i++) {
+                                const sub = categories[indice].sub[i];
+
+                                let zert = document.createElement('input');
+                                zert.type = "checkbox";
+                                zert.id = "zert" + i;
+                                zert.classList = "sub_checkboxes";
+                                zert.label = sub.title;
+                                if(event.sub_categories){
+                                    let condtition = false;
+                                    for(let event_sub of event.sub_categories){
+                                        if (event_sub == sub.title){
+                                            condtition = true;
+                                        }
+                                    }
+                                    zert.checked = condtition;
+                                }
+                                
+                                
+                                zert.addEventListener('click', updatesubcat);
+
+                                let p = document.createElement('p');
+                                p.classList = "Checkboxes_labels";
+                                p.textContent = sub.title;
+
+
+                                selector_checkboxes.appendChild(zert);
+                                selector_checkboxes.appendChild(p);
+
+                            }
+                        }
+
+                        function updatesubcat() {
+                            console.log("update sub cat");
+                            
+                            let array = [];
+                            for (let sub of document.getElementsByClassName('sub_checkboxes')) {
+                                if (sub.checked) {
+                                    array.push(sub.label);
+                                }
+                            }
+                            event.sub_categories = array;
+                            console.log("event.sub_categories", event.sub_categories);
+                        }
+
+                        let icon_notes = document.createElement('div');
+                        icon_notes.id = "icon_notes";
+                        icon_notes.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 99 99"><title>Asset 3</title><g id="ecd023c3-1ae7-4997-b222-ed4f6a5b99f3" data-name="Layer 2"><g id="b4406f56-0572-40fb-a642-5b9ecbf32c4b" data-name="Layer 1"><line x1="17.24" y1="13.5" x2="99" y2="13.5" style="fill:#fff;stroke:#000;stroke-miterlimit:10;stroke-width:10px"/><line x1="0.49" y1="31" x2="99" y2="31" style="fill:#fff;stroke:#000;stroke-miterlimit:10;stroke-width:10px"/><line y1="49" x2="98.51" y2="49" style="fill:#fff;stroke:#000;stroke-miterlimit:10;stroke-width:10px"/><line x1="0.49" y1="67" x2="99" y2="67" style="fill:#fff;stroke:#000;stroke-miterlimit:10;stroke-width:10px"/><line x1="0.49" y1="85.5" x2="83.24" y2="85.5" style="fill:#fff;stroke:#000;stroke-miterlimit:10;stroke-width:10px"/><rect width="99" height="99" style="fill:none"/></g></g></svg>`;
+                        div_info.appendChild(icon_notes);
 
                         let input_notes = document.createElement('input');
                         input_notes.id = "input_notes";
@@ -429,25 +508,25 @@ function DrawEvent() {
                         button_save.id = "button_save";
                         button_save.textContent = "Save";
                         button_save.onclick = () => {
-                            if(event.id == "Tempo"){
+                            if (event.id == "Tempo") {
                                 SavenewEvent(event);
                             } else {
                                 savemodifiedevent(event);
                             }
-                        
-                            
+                            reset(document.getElementById('event_info'));
+
                         }
                         let button_furtherEdit = document.createElement('button');
-                            button_furtherEdit.id = "button_furtherEdit";
-                            button_furtherEdit.textContent = "Further Edits";
-                            button_furtherEdit.onclick = () => {
-                                localStorage.clear();
-                             localStorage.setItem("ToModify", JSON.stringify(event));
+                        button_furtherEdit.id = "button_furtherEdit";
+                        button_furtherEdit.textContent = "Further Edits";
+                        button_furtherEdit.onclick = () => {
+                            localStorage.clear();
+                            localStorage.setItem("ToModify", JSON.stringify(event));
                             window.location.href = 'CreateEvenement';
-                            }
-                            div_info.appendChild(button_furtherEdit)
+                        }
+                        div_info.appendChild(button_furtherEdit)
 
-                        
+
                     }
 
                     icon_modify.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" ><path d="M20.41 4.94l-1.35-1.35c-.78-.78-2.05-.78-2.83 0L3 16.82V21h4.18L20.41 7.77c.79-.78.79-2.05 0-2.83zm-14 14.12L5 19v-1.36l9.82-9.82 1.41 1.41-9.82 9.83z"></path></svg>`
@@ -475,6 +554,12 @@ function DrawEvent() {
 
                     div_info.appendChild(event_title);
                     event_title.textContent = event.title;
+
+                    let icon_time = document.createElement('div');
+                    icon_time.id = "icon_time";
+                    icon_time.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 99 99"><title>Asset 2</title><g id="a0951a2d-e198-423f-be4d-53c1ee2544a1" data-name="Layer 2"><g id="aadf28d6-8546-497b-a0f6-9fced43c000b" data-name="Layer 1"><rect width="99" height="99" style="fill:none"/><polygon points="88.5 22.9 88.5 32.88 12 32.88 12 22.9 21 12.5 79.5 12.5 88.5 22.9" style="fill:gray;stroke:#000;stroke-miterlimit:10;stroke-width:7px"/><rect x="12" y="32.88" width="76.5" height="57.62" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:7px"/><path d="M32,19c-3.31,0-6-3.13-6-7s2.69-7,6-7,6,3.13,6,7" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:3px"/><path d="M44,19c-3.31,0-6-3.13-6-7s2.69-7,6-7,6,3.13,6,7" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:3px"/><path d="M56,19c-3.31,0-6-3.13-6-7s2.69-7,6-7,6,3.13,6,7" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:3px"/><path d="M68,19c-3.31,0-6-3.13-6-7s2.69-7,6-7,6,3.13,6,7" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:3px"/></g></g></svg>`;
+                    div_info.appendChild(icon_time);
+
                     let options = { year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" };
                     let write2 = new Intl.DateTimeFormat(lang, options).format(new Date(event.starting));
                     write2 += " - ";
@@ -490,17 +575,35 @@ function DrawEvent() {
                     div_info.appendChild(inf_times);
                     inf_times.textContent = write2;
 
+                    let icon_category = document.createElement('div');
+                    icon_category.id = "icon_category";
+                    icon_category.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 99 99"><title>Asset 1</title><g id="add7470c-2201-4f7f-8555-2f3671b05c0a" data-name="Layer 2"><g id="b88ab875-f118-4f76-8547-812c600e33ef" data-name="Layer 1"><rect width="99" height="99" style="fill:none"/><circle cx="40" cy="20" r="9" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:5px"/><path d="M43,28c2,12,9,35,9,35s0,22,35,8" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:5px"/><path d="M45.68,40.28C46,39.52,70,21,70,54" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:5px"/><path d="M45.68,41.18S36,59,19,42" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:5px"/><path d="M51.77,62.24S18,65,33,90" style="fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:5px"/></g></g></svg>`;
+                    div_info.appendChild(icon_category);
+
                     let inf_category = document.createElement('p');
                     div_info.appendChild(inf_category);
                     inf_category.id = "inf_category";
                     inf_category.textContent = event.category;
 
-                    let div_notes = document.createElement('div');
-                    div_notes.id = "div_notes";
-                    div_info.appendChild(div_notes);
+                    if (event.sub_categories) {
+                        let inf_sub_category = document.createElement('p');
+                        div_info.appendChild(inf_sub_category);
+                        inf_sub_category.id = "inf_sub_category";
+                        write = "";
+                        for (let i = 0; i < event.sub_categories.length; i++) {
+                            write += event.sub_categories[i] + " ";
+                        }
+                        inf_sub_category.textContent = write;
+                    }
+
+
+                    let icon_notes = document.createElement('div');
+                    icon_notes.id = "icon_notes";
+                    icon_notes.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 99 99"><title>Asset 3</title><g id="ecd023c3-1ae7-4997-b222-ed4f6a5b99f3" data-name="Layer 2"><g id="b4406f56-0572-40fb-a642-5b9ecbf32c4b" data-name="Layer 1"><line x1="17.24" y1="13.5" x2="99" y2="13.5" style="fill:#fff;stroke:#000;stroke-miterlimit:10;stroke-width:10px"/><line x1="0.49" y1="31" x2="99" y2="31" style="fill:#fff;stroke:#000;stroke-miterlimit:10;stroke-width:10px"/><line y1="49" x2="98.51" y2="49" style="fill:#fff;stroke:#000;stroke-miterlimit:10;stroke-width:10px"/><line x1="0.49" y1="67" x2="99" y2="67" style="fill:#fff;stroke:#000;stroke-miterlimit:10;stroke-width:10px"/><line x1="0.49" y1="85.5" x2="83.24" y2="85.5" style="fill:#fff;stroke:#000;stroke-miterlimit:10;stroke-width:10px"/><rect width="99" height="99" style="fill:none"/></g></g></svg>`;
+                    div_info.appendChild(icon_notes);
 
                     let inf_notes = document.createElement('p');
-                    div_notes.appendChild(inf_notes);
+                    div_info.appendChild(inf_notes);
                     inf_notes.id = "inf_notes";
                     inf_notes.textContent = event.notes;
                 }
@@ -549,7 +652,7 @@ function DrawEvent() {
 
                         div.classList.remove("cursor_move");
                         // console.log("move", move);
-
+                        reset(document.getElementById('event_info'));
                         if (!move) {
                             Give_event_Info();
                         } if (isResizing) {
@@ -647,7 +750,7 @@ function DrawEvent() {
 
                 }
 
-                
+
 
 
             }
@@ -675,6 +778,7 @@ function map(x, in_min, in_max, out_min, out_max) {
 }
 
 async function savemodifiedevent(event) {
+    console.log(event);
     const sendoptions = {
         method: 'POST',
         headers: {
@@ -700,14 +804,15 @@ function magnet(date) {
     return Date.parse(newd) - Date.parse(date);
 }
 
-async function SavenewEvent(event){
+async function SavenewEvent(event) {
 
     data = {
         title: event.title,
         starting: new Date(event.starting),
         ending: new Date(event.ending),
         notes: event.notes,
-        category: event.category
+        category: event.category,
+        sub_categories: event.sub_categories,
     }
 
     const sendoptions = {

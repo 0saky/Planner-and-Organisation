@@ -77,28 +77,33 @@ body{
 #Div_info{
   position: absolute;
   width: 350px;
-  height: 150px;
   background-color: white;
   border: black solid 2px;
   border-radius: 6px;
   
   z-index: 3;
   overflow: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 10% 40% auto;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "icones icones icones""title title title " "icon_date date date""icone_cate cate cate" "sub_cate sub_cate sub_cate" "icone_notes notes notes" "save save further";
+  
 }
 #info_title{
   margin-bottom: 5px;
   margin-top: 0;
   margin-left: 5px;
+  grid-area: title;
 }
 #inf_times{
   margin: 5px;
   margin-left: 10px;
+  grid-area: date;
 }
 #div_icons{
   display: flex;
+  grid-area: icones;
 }
 .icons{
   cursor: pointer;
@@ -107,6 +112,7 @@ body{
 #inf_category{
   margin: 0px;
   margin-left:10px;
+  grid-area: cate;
 }
 #inf_notes{
   margin: 0px;
@@ -144,4 +150,42 @@ body{
   border-width: 0px;
   border-bottom: 2px solid blue;
   font-size: 20px;
+  grid-area: title;
+}
+#selector_checkboxes{
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-area: sub_cate;
+}
+.Checkboxes_labels{
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+#inf_sub_category{
+  margin: 0px;
+  margin-left: 15px;
+  font-size: 15px;
+  grid-area: sub_cate;
+}
+#icon_category{
+  grid-area: icone_cate;
+}
+#selecter{
+  grid-area: cate;
+  height: 50px;
+}
+#icon_notes{
+  grid-area: icone_notes;
+}
+#button_save{
+  grid-area: save;
+}
+#button_furtherEdit{
+  grid-area: further;
+}
+#div_notes{
+  grid-area: notes;
+}
+#input_notes{
+  grid-area: notes;
 }
