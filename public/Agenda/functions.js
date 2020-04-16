@@ -445,36 +445,40 @@ function DrawEvent() {
                                 }
                             }
 
-                            for (let i = 0; i < categories[indice].sub.length; i++) {
-                                const sub = categories[indice].sub[i];
-
-                                let zert = document.createElement('input');
-                                zert.type = "checkbox";
-                                zert.id = "zert" + i;
-                                zert.classList = "sub_checkboxes";
-                                zert.label = sub.title;
-                                if(event.sub_categories){
-                                    let condtition = false;
-                                    for(let event_sub of event.sub_categories){
-                                        if (event_sub == sub.title){
-                                            condtition = true;
+                            if(categories[indice].sub){
+                                for (let i = 0; i < categories[indice].sub.length; i++) {
+                                    const sub = categories[indice].sub[i];
+    
+                                    let zert = document.createElement('input');
+                                    zert.type = "checkbox";
+                                    zert.id = "zert" + i;
+                                    zert.classList = "sub_checkboxes";
+                                    zert.label = sub.title;
+                                    if(event.sub_categories){
+                                        let condtition = false;
+                                        for(let event_sub of event.sub_categories){
+                                            if (event_sub == sub.title){
+                                                condtition = true;
+                                            }
                                         }
+                                        zert.checked = condtition;
                                     }
-                                    zert.checked = condtition;
+                                    
+                                    
+                                    zert.addEventListener('click', updatesubcat);
+    
+                                    let p = document.createElement('p');
+                                    p.classList = "Checkboxes_labels";
+                                    p.textContent = sub.title;
+    
+    
+                                    selector_checkboxes.appendChild(zert);
+                                    selector_checkboxes.appendChild(p);
+    
                                 }
-                                
-                                
-                                zert.addEventListener('click', updatesubcat);
-
-                                let p = document.createElement('p');
-                                p.classList = "Checkboxes_labels";
-                                p.textContent = sub.title;
-
-
-                                selector_checkboxes.appendChild(zert);
-                                selector_checkboxes.appendChild(p);
-
                             }
+
+                            
                         }
 
                         function updatesubcat() {

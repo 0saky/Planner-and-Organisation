@@ -77,6 +77,7 @@ app.post('/ModifiedEvenement', (request, response) => {
         starting: receved.starting,
         ending: receved.ending,
         category: receved.category,
+        sub_categories: receved.sub_categories,
         notes: receved.notes,
         deleted: receved.deleted
     }
