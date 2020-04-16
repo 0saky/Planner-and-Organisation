@@ -8,6 +8,8 @@ let paradays = [];
 let dates = [];
 let widthofDays = 250;
 let evenements;
+let magnet_force = 15;
+
 
 localStorage.clear();
 
@@ -52,35 +54,90 @@ requestCategories();
 SyncData();
 
 main.addEventListener('click', function main_click(e) {
-  //  console.log("e", e);
-    let target = e.target;
-    let stay = true;
-    let condition = false;
+    //  console.log("e", e);
 
-    do {
-       if(target.id == "main"){
-           stay = false;
-       } else {
-           if(target.classList){
-               for(let c of target.classList){
-                   if(c == "Event_tile"){
-                       condition = true;
-                       stay = false;
-                   }
-               }
-           }
-           target = target.parentNode;
-       }
-    }while(stay);
+    if (e.target) {
+        let target = e.target;
+        let stay = true;
+        let condition = false;
 
-   // console.log("Event_tile", condition);
 
-    if (!condition) {
-        reset(document.getElementById('event_info'));
+        do {
+            if (target.id == "main") {
+                stay = false;
+            } else {
+                if (target.classList) {
+                    for (let c of target.classList) {
+                        if (c == "Event_tile") {
+                            condition = true;
+                            stay = false;
+                        }
+                    }
+                }
+                target = target.parentNode;
+            }
+        } while (stay);
+
+
+        if (!condition) {
+            reset(document.getElementById('event_info'));
+
+
+        }
+
     }
+
 })
 
 
+
+document.getElementById('calendar').addEventListener('dblclick', (e) => {
+
+    console.log("e", e);
+
+    let day;
+    let X = e.clientX;
+    let Y = e.clientY;
+
+    for (let date of document.getElementsByClassName('day')) {
+        if (date.offsetLeft < e.clientX && e.clientX < date.offsetLeft + date.clientWidth) {
+            day = date;
+        }
+    }
+
+    //console.log(day);
+
+    if (day) {
+        let shift = document.getElementById('Head').clientHeight + document.getElementById('HBouttons').clientHeight;
+
+        let temp = map(Y, shift, main.clientHeight, Date.parse(day.day_start), Date.parse(day.day_end));
+        //console.log("temp", temp);
+        let starting = new Date(temp);
+        starting = new Date(Date.parse(starting) + magnet(starting));
+        let ending = new Date(starting);
+        ending.setHours(ending.getHours() + 2);
+
+        let event = {
+            title: "",
+            category: "",
+            notes: "",
+            starting: starting,
+            ending: ending,
+            id: "Tempo",
+        }
+        let id = evenements.length;
+        evenements.push(event);
+
+        event = evenements[id];
+
+        DrawEvent();
+
+    }
+
+
+
+
+})
 
 
 
